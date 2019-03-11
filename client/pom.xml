@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>JavaEE</groupId>
+        <artifactId>JavaEE</artifactId>
+        <relativePath>../pom.xml</relativePath>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>client</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <junit.vesion>4.10</junit.vesion>
+        <cxf.version>3.2.7</cxf.version>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.cxf</groupId>
+                <artifactId>cxf-codegen-plugin</artifactId>
+                <version>${cxf.version}</version>
+                <executions>
+                    <execution>
+                        <id>generate-sources</id>
+                        <phase>generate-sources</phase>
+                        <configuration>
+                            <sourceRoot>${project.basedir}/src/main/java</sourceRoot>
+                            <wsdlOptions>
+                                <wsdlOption>
+                                    <wsdl>http://localhost:8080/userEndPoint?wsdl</wsdl>
+                                </wsdlOption>
+        <!--                                <wsdlOption>
+                                            <wsdl>http://localhost:8080/projectEndPoint?wsdl</wsdl>
+                                        </wsdlOption>
+                                        <wsdlOption>
+                                            <wsdl>http://localhost:8080/taskEndPoint?wsdl</wsdl>
+                                        </wsdlOption>
+                                        <wsdlOption>
+                                            <wsdl>http://localhost:8080/adminEndPoint?wsdl</wsdl>
+                                        </wsdlOption>-->
+                            </wsdlOptions>
+                        </configuration>
+                        <goals>
+                            <goal>wsdl2java</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+    
+</project>
