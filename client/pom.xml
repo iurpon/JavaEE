@@ -13,6 +13,7 @@
 
     <artifactId>client</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
 
     <properties>
         <junit.vesion>4.10</junit.vesion>
