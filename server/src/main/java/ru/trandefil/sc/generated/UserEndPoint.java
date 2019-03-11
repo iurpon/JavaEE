@@ -1,7 +1,7 @@
 package ru.trandefil.sc.generated;
 
-import ru.trandefil.tm.dto.UserDTO;
-import ru.trandefil.tm.entity.Session;
+import ru.trandefil.sc.dto.UserDTO;
+import ru.trandefil.sc.model.Session;
 
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
