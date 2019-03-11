@@ -1,12 +1,12 @@
 package ru.trandefil.sc.endpoint;
 
-import ru.trandefil.tm.api.AdminService;
-import ru.trandefil.tm.entity.Role;
-import ru.trandefil.tm.entity.Session;
-import ru.trandefil.tm.exception.SecurityAuthentificationException;
-import ru.trandefil.tm.exception.SecurityAuthorizationException;
-import ru.trandefil.tm.generated.AdminEndPoint;
-import ru.trandefil.tm.util.SignatureUtil;
+import ru.trandefil.sc.api.AdminService;
+import ru.trandefil.sc.model.Role;
+import ru.trandefil.sc.model.Session;
+import ru.trandefil.sc.exception.SecurityAuthentificationException;
+import ru.trandefil.sc.exception.SecurityAuthorizationException;
+import ru.trandefil.sc.generated.AdminEndPoint;
+import ru.trandefil.sc.util.SignatureUtil;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;

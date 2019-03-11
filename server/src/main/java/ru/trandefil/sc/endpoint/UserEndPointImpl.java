@@ -1,15 +1,15 @@
 package ru.trandefil.sc.endpoint;
 
 import lombok.NonNull;
-import ru.trandefil.tm.api.UserService;
-import ru.trandefil.tm.dto.UserDTO;
-import ru.trandefil.tm.entity.Role;
-import ru.trandefil.tm.entity.Session;
-import ru.trandefil.tm.entity.User;
-import ru.trandefil.tm.exception.SecurityAuthentificationException;
-import ru.trandefil.tm.exception.SecurityAuthorizationException;
-import ru.trandefil.tm.generated.UserEndPoint;
-import ru.trandefil.tm.util.SignatureUtil;
+import ru.trandefil.sc.api.UserService;
+import ru.trandefil.sc.dto.UserDTO;
+import ru.trandefil.sc.model.Role;
+import ru.trandefil.sc.model.Session;
+import ru.trandefil.sc.model.User;
+import ru.trandefil.sc.exception.SecurityAuthentificationException;
+import ru.trandefil.sc.exception.SecurityAuthorizationException;
+import ru.trandefil.sc.generated.UserEndPoint;
+import ru.trandefil.sc.util.SignatureUtil;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
