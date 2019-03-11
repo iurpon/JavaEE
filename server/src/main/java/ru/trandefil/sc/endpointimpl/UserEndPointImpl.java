@@ -7,12 +7,14 @@ import ru.trandefil.sc.model.Role;
 import ru.trandefil.sc.model.User;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
 import java.util.List;
 
-@WebService
+@Singleton
+@WebService(endpointInterface = "ru.trandefil.sc.endpoint.UserEndPoint")
 public class UserEndPointImpl implements UserEndPoint {
 
     @Inject

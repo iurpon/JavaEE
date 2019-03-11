@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.logging.Logger;
 
-@WebServlet("/")
+//@WebServlet("/")
 public class WelcomeServlet extends HttpServlet {
 
     private Logger logger = Logger.getLogger(this.getClass().getName());

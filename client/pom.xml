@@ -34,7 +34,7 @@
                             <sourceRoot>${project.basedir}/src/main/java</sourceRoot>
                             <wsdlOptions>
                                 <wsdlOption>
-                                    <wsdl>http://localhost:8080/userEndPoint?wsdl</wsdl>
+                                    <wsdl>http://localhost:8080/JavaEE/UserEndPointImpl?wsdl</wsdl>
                                 </wsdlOption>
         <!--                                <wsdlOption>
                                             <wsdl>http://localhost:8080/projectEndPoint?wsdl</wsdl>

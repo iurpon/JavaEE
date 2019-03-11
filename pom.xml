@@ -20,7 +20,7 @@
     </properties>
 
     <build>
-        <finalName>ServletCrud</finalName>
+        <finalName>JavaEE</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
