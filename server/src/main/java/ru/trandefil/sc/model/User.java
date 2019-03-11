@@ -9,15 +9,15 @@ import lombok.Setter;
 @NoArgsConstructor
 public class User extends AbstractEntity {
 
-    private String userName;
+    private String name;
 
     private String password;
 
     private Role role;
 
-    public User(String id, String userName, String password, Role role) {
+    public User(String id, String name, String password, Role role) {
         super(id);
-        this.userName = userName;
+        this.name = name;
         this.password = password;
         this.role = role;
     }
@@ -25,7 +25,7 @@ public class User extends AbstractEntity {
     @Override
     public String toString() {
         return "User{" +
-                "userName='" + userName + '\'' +
+                "name='" + name + '\'' +
                 ", password='" + password + '\'' +
                 '}';
     }

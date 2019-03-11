@@ -13,6 +13,8 @@ public class Project extends AbstractEntity {
 
     private String description;
 
+    private User user;
+
     public Project(String id, String name, String description) {
         super(id);
         this.name = name;

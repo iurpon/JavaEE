@@ -19,7 +19,7 @@ import javax.xml.bind.annotation.XmlType;
  *       &lt;sequence&gt;
  *         &lt;element name="password" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
  *         &lt;element name="role" type="{http://endpoint.sc.trandefil.ru/}role" minOccurs="0"/&gt;
- *         &lt;element name="userName" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
+ *         &lt;element name="name" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/extension&gt;
  *   &lt;/complexContent&gt;
@@ -32,7 +32,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "user", propOrder = {
     "password",
     "role",
-    "userName"
+    "name"
 })
 public class User
     extends AbstractEntity
@@ -92,7 +92,7 @@ public class User
     }
 
     /**
-     * Gets the value of the userName property.
+     * Gets the value of the name property.
      * 
      * @return
      *     possible object is
@@ -104,7 +104,7 @@ public class User
     }
 
     /**
-     * Sets the value of the userName property.
+     * Sets the value of the name property.
      * 
      * @param value
      *     allowed object is

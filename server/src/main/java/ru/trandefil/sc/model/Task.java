@@ -10,7 +10,6 @@ import java.util.Date;
 @Getter
 @Setter
 @NoArgsConstructor
-@ToString
 public class Task extends AbstractEntity {
 
     private String name;
@@ -23,6 +22,10 @@ public class Task extends AbstractEntity {
 
     private Project project;
 
+    private User assignee;
+
+    private User executor;
+
     public Task(String id, String name, String description, Date start, Date end, Project project) {
         super(id);
         this.name = name;
@@ -30,6 +33,15 @@ public class Task extends AbstractEntity {
         this.start = start;
         this.end = end;
         this.project = project;
+    }
+
+    @Override
+    public String toString() {
+        return "Task{" +
+                "name='" + name + '\'' +
+                ", assignee=" + assignee +
+                ", executor=" + executor +
+                '}';
     }
 
 }

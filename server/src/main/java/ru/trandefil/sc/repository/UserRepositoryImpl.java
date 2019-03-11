@@ -29,7 +29,7 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public User getLoggedUser(String userName, String password) {
         User user = users.values().stream()
-                .filter(u -> u.getUserName().equals(userName) && u.getPassword().equals(password))
+                .filter(u -> u.getName().equals(userName) && u.getPassword().equals(password))
                 .findAny().orElse(null);
         if (user == null) {
             System.out.println("bad user name or password.");
@@ -48,7 +48,7 @@ public class UserRepositoryImpl implements UserRepository {
         if (user.isNew()) {
             user.setId(UUID.randomUUID().toString());
         }
-        return users.put(user.getUserName(), user);
+        return users.put(user.getName(), user);
     }
 
     @Override
