@@ -25,8 +25,6 @@ public class LoginServlet extends HttpServlet {
     @Inject
     private UserRepository userRepository;
 
-    @PersistenceContext
-    private EntityManager entityManager;
 
     private Logger logger = Logger.getLogger(this.getClass().getName());
 
@@ -38,7 +36,7 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        logger.info("LoginServlet doPost()");
+/*        logger.info("LoginServlet doPost()");
         final String name = req.getParameter("name");
         final String password = req.getParameter("password");
         final User loginUser = userRepository.getLogged(name,password,entityManager);
@@ -48,10 +46,10 @@ public class LoginServlet extends HttpServlet {
             req.getRequestDispatcher("/WEB-INF/view/login.jsp").forward(req, resp);
             return;
         }
-/*        final HttpSession httpSession = req.getSession();
-        httpSession.setAttribute("loginUser", loginUser);*/
+*//*        final HttpSession httpSession = req.getSession();
+        httpSession.setAttribute("loginUser", loginUser);*//*
         SessionUtil.storeLoginUser(req.getSession(), loginUser);
-        req.getRequestDispatcher("/WEB-INF/view/hello.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/view/hello.jsp").forward(req, resp);*/
     }
 
 }

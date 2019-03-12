@@ -17,6 +17,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Alternative;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -29,6 +30,9 @@ public class UserServiceImpl implements UserService {
 
     @Inject
     private SessionRepository sessionRepository;
+
+    @PersistenceContext(unitName = "entityManager")
+    private EntityManager entityManager;
 
     private final Logger logger = Logger.getLogger(this.getClass().getName());
 
@@ -120,11 +124,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> getAll() {
-        final EntityManager em = EMFactoryUtil.getEntityManager();
+/*        final EntityManager em = EMFactoryUtil.getEntityManager();
         em.getTransaction().begin();
         final List<User> users = userRepository.getAll(em);
         em.close();
-        return users;
+        return users;*/
+        return userRepository.getAll(entityManager);
     }
 
     @Override

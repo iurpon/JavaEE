@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.Id;
 import java.util.UUID;
 
 @Getter
@@ -11,6 +12,7 @@ import java.util.UUID;
 @NoArgsConstructor
 public abstract class AbstractEntity {
 
+    @Id
     protected String id ;
 
     public AbstractEntity(String id) {
