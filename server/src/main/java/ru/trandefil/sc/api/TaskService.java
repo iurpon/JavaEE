@@ -6,18 +6,18 @@ import java.util.List;
 
 public interface TaskService {
 
-    Task save(Task project);
-
-    Task getById(String id);
-
-    void delete(Task project);
-
-    void deletById(String id);
+    List<Task> getAll(String userId);
 
     List<Task> getAll();
 
-    void clear();
+    Task save(String userId, Task task);
 
-    void saveAll(List<Task> tasks);
+    void delete(String userId, Task task);
+
+    boolean deleteByName(String userId, String name);
+
+    Task getByName(String userId, String name);
+
+    Task getByid(String userId, String id);
 
 }

@@ -2,22 +2,25 @@ package ru.trandefil.sc.api;
 
 import ru.trandefil.sc.model.Task;
 
+import javax.persistence.EntityManager;
 import java.util.List;
 
 public interface TaskRepository {
 
-    Task save(Task project);
+    List<Task> getAll(String userId, EntityManager em);
 
-    Task getById(String id);
+    List<Task> getAll(EntityManager em);
 
-    void delete(Task project);
+    Task save(Task task, EntityManager em);
 
-    void deleteById(String id);
+    void delete(Task task, EntityManager em);
 
-    List<Task> getAll();
+    boolean deleteByName(String userId, String name, EntityManager em);
 
-    void clear();
+    Task getByName(String userId, String name, EntityManager em);
 
-    void saveAll(List<Task> tasks);
+    Task getByid(String userId, String id, EntityManager em);
+
+    void clear(EntityManager em);
 
 }

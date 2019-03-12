@@ -2,18 +2,29 @@ package ru.trandefil.sc.api;
 
 import ru.trandefil.sc.model.User;
 
+import javax.persistence.EntityManager;
 import java.util.List;
 
 public interface UserRepository {
 
-    User getLoggedUser(String userName, String password);
+    List<User> getAll(EntityManager entityManager);
 
-    User save(User user);
+    User getLogged(String login, String pass, EntityManager entityManager);
 
-    List<User> getAll();
+    User findByName(String name, EntityManager em);
 
-    void deleteById(String id);
+    User getById(String userId, EntityManager em);
 
-    User getById(String id);
+    User saveOrUpdate(User user, EntityManager em);
+
+    void delete(User user, EntityManager em);
+
+    boolean deleteByName(String name, EntityManager em);
+
+    boolean deleteById(String id, EntityManager em);
+
+    User getRef(String userId, EntityManager em);
+
+    void clear(EntityManager em);
 
 }

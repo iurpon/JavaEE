@@ -2,18 +2,25 @@ package ru.trandefil.sc.api;
 
 import ru.trandefil.sc.model.Project;
 
+import javax.persistence.EntityManager;
 import java.util.List;
 
 public interface ProjectRepository {
 
-    Project save(Project project);
+    List<Project> getAll(String userId, EntityManager em);
 
-    Project getById(String id);
+    List<Project> getAll(EntityManager em);
 
-    void delete(Project project);
+    Project getByName(String userId, String projectName, EntityManager em);
 
-    void deleteById(String id);
+    Project getById(String userId, String projectId, EntityManager em);
 
-    List<Project> getAll();
+    Project save(Project project, EntityManager em);
+
+    void delete(Project project, EntityManager em);
+
+    boolean deleteByName(String userId, String projectName, EntityManager em);
+
+    void clear(EntityManager em);
 
 }
