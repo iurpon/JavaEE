@@ -13,6 +13,7 @@ import ru.trandefil.sc.util.HashUtil;
 import ru.trandefil.sc.util.SignatureUtil;
 import ru.trandefil.sc.util.UUIDUtil;
 
+import javax.ejb.Stateless;
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Alternative;
 import javax.inject.Inject;
@@ -23,6 +24,7 @@ import java.util.logging.Logger;
 
 @ApplicationScoped
 @Alternative
+@Stateless
 public class UserServiceImpl implements UserService {
 
     @Inject
