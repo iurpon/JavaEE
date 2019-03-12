@@ -78,7 +78,7 @@ public class TaskEndPointImpl implements TaskEndPoint {
             @WebParam(name = "executorId") @NonNull String executorId,
             @WebParam(name = "session") @NonNull Session session
     ) {
-        logger.info("taskendpoint saveTask ");
+/*        logger.info("taskendpoint saveTask ");
         if (!SignatureUtil.checkCorrectSession(session)) {
             System.out.println("bad signature.");
             throw new SecurityAuthentificationException("security authentification exception.");
@@ -89,7 +89,8 @@ public class TaskEndPointImpl implements TaskEndPoint {
         final Task newTask = new Task(id, name, desc, start, end, project, assignee, executor);
         final Task saved = taskService.save(session.getUserId(), newTask);
         logger.info("taskendpoint returning " + saved);
-        return getTaskDTO(saved);
+        return getTaskDTO(saved);*/
+        return null;
     }
 
     @WebMethod
@@ -132,9 +133,10 @@ public class TaskEndPointImpl implements TaskEndPoint {
         final Project project = projectService.getByName(userId, taskDTO.getProjectId());
         final User assigner = userService.getByName(taskDTO.getAssigneeId());
         final User executor = userService.getByName(taskDTO.getExecutorId());
-        return new Task(taskDTO.getId(), taskDTO.getName(),
+/*        return new Task(taskDTO.getId(), taskDTO.getName(),
                 taskDTO.getDescription(), taskDTO.getBegin(), taskDTO.getEnd(),
-                project, assigner, executor);
+                project, assigner, executor);*/
+        return null;
     }
 
 }

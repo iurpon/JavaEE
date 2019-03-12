@@ -1,10 +1,13 @@
 package ru.trandefil.sc.servlet;
 
+import ru.trandefil.sc.api.UserRepository;
 import ru.trandefil.sc.api.UserService;
 import ru.trandefil.sc.model.User;
 import ru.trandefil.sc.util.SessionUtil;
 
 import javax.inject.Inject;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,6 +22,12 @@ public class LoginServlet extends HttpServlet {
     @Inject
     private UserService userService;
 
+    @Inject
+    private UserRepository userRepository;
+
+    @PersistenceContext
+    private EntityManager entityManager;
+
     private Logger logger = Logger.getLogger(this.getClass().getName());
 
     @Override
@@ -32,7 +41,7 @@ public class LoginServlet extends HttpServlet {
         logger.info("LoginServlet doPost()");
         final String name = req.getParameter("name");
         final String password = req.getParameter("password");
-        final User loginUser = userService.getLoggedUser(name, password);
+        final User loginUser = userRepository.getLogged(name,password,entityManager);
         System.out.println(loginUser);
         if (loginUser == null) {
             req.setAttribute("message", "Bad login. Try again.");

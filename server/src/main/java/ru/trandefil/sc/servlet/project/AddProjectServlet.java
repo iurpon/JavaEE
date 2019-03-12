@@ -20,7 +20,7 @@ public class AddProjectServlet extends HttpServlet {
     @Inject
     private ProjectService projectService;
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+/*    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         logger.info("AddProjectServlet doPost()");
         final String name = request.getParameter("name");
         if(name.isEmpty() || name == null){
@@ -37,7 +37,7 @@ public class AddProjectServlet extends HttpServlet {
         final Project project = new Project(null, name, description);
         projectService.save(project);
         response.sendRedirect("projects");
-    }
+    }*/
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         logger.info("AddProjectServlet doGet()");

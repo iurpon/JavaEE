@@ -23,10 +23,10 @@ public class DeleteTaskServlet extends HttpServlet {
         logger.info("DeleteTaskServlet doPost()");
     }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+/*    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         logger.info("DeleteTaskServlet doGet()");
         final String id = request.getParameter("id");
         taskService.deletById(id);
         response.sendRedirect("tasks");
-    }
+    }*/
 }

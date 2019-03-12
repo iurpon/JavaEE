@@ -30,7 +30,7 @@ public class DeleteProjectServlet extends HttpServlet {
         logger.info("DeleteProjectServlet doPost()");
     }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+/*    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         logger.info("DeleteProjectServlet doGet()");
         final String id = request.getParameter(("id"));
         projectService.deleteById(id);
@@ -40,6 +40,6 @@ public class DeleteProjectServlet extends HttpServlet {
         taskService.clear();
         taskService.saveAll(collect);
         response.sendRedirect("projects");
-    }
+    }*/
 
 }

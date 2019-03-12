@@ -1,65 +1,111 @@
 package ru.trandefil.sc.repository;
 
+import lombok.NonNull;
 import ru.trandefil.sc.api.TaskRepository;
 import ru.trandefil.sc.model.Task;
+import ru.trandefil.sc.util.UUIDUtil;
 
 import javax.enterprise.context.ApplicationScoped;
-import java.util.*;
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+import java.util.List;
+import java.util.logging.Logger;
 
-import static ru.trandefil.sc.util.EntityData.*;
 
 @ApplicationScoped
-public class TaskRepositoryImpl implements TaskRepository{
+public class TaskRepositoryImpl implements TaskRepository {
 
-    private static Map<String, Task> taskMap = new HashMap<>();
+    private final Logger logger = Logger.getLogger(this.getClass().getName());
 
-    static {
-        init();
-    }
-
-    private static void init(){
-        taskMap.put(TASK1.getId(),TASK1);
-        taskMap.put(TASK2.getId(),TASK3);
-        taskMap.put(TASK3.getId(),TASK3);
-        taskMap.put(TASK4.getId(),TASK4);
+    @Override
+    public List<Task> getAll(@NonNull final String userId, @NonNull final EntityManager em) {
+        logger.info(" repo getAll();");
+        final Query query = em.createQuery("select t from Task t where t.assignee.id = :userId or t.executor = :userId");
+        query.setParameter("userId", userId);
+        final List<Task> tasks = query.getResultList();
+        logger.info("returning : " + tasks);
+        return tasks;
     }
 
     @Override
-    public Task save(Task task) {
-        if(task.isNew()){
-            task.setId(UUID.randomUUID().toString());
+    public List<Task> getAll(@NonNull final EntityManager em) {
+        logger.info("repo getAll()");
+        final Query query = em.createQuery("select t from Task t ");
+        final List<Task> tasks = query.getResultList();
+        logger.info("returning " + tasks);
+        return tasks;
+    }
+
+    @Override
+    public Task save(@NonNull final Task task, @NonNull final EntityManager em) {
+        logger.info("repo save");
+        if (task.isNew()) {
+            task.setId(UUIDUtil.getUniqueString());
+            logger.info("persisting task : " + task);
+            em.persist(task);
+            logger.info("returning " + task);
+            return task;
         }
-        return taskMap.put(task.getId(),task);
+        logger.info("returning " + task);
+        return em.merge(task);
     }
 
     @Override
-    public Task getById(String id) {
-        return taskMap.get(id);
+    public void delete(@NonNull final Task task, @NonNull final EntityManager em) {
+        logger.info("repo delete");
+        em.remove(task);
     }
 
     @Override
-    public void delete(Task task) {
-        taskMap.remove(task.getId());
+    public boolean deleteByName(@NonNull final String userId, @NonNull final String name, @NonNull final EntityManager em) {
+        logger.info("repo deleteByName");
+        final Query query = em.createQuery("delete from Task t where t.assignee.id =:userId and t.name = :name");
+        query.setParameter("userId", userId);
+        query.setParameter("name", name);
+        final int result = query.executeUpdate();
+        logger.info("deleted by name ? : " + (result != 0));
+        return result != 0;
     }
 
     @Override
-    public void deleteById(String id) {
-        taskMap.remove(id);
+    public Task getByName(@NonNull final String userId, @NonNull final String name, @NonNull final EntityManager em) {
+        logger.info("getByName repo");
+        final Query query = em.createQuery("select t from Task t where (t.assignee.id = :userId or t.executor.id = :userId) and t.name = :name");
+        query.setParameter("name", name);
+        query.setParameter("userId", userId);
+        final Task task = (Task) query.getSingleResult();
+        logger.info("returning " + task);
+        return task;
     }
 
     @Override
-    public List<Task> getAll() {
-        return new ArrayList<>(taskMap.values());
+    public Task getByid(@NonNull final String userId, @NonNull final String id, @NonNull final EntityManager em) {
+        logger.info("repo getById");
+        final Query query = em.createQuery("select t from Task t where (t.assignee.id = :userId or t.executor.id = :userId) and dt.id = :id");
+        query.setParameter("userId", userId);
+        query.setParameter("id", id);
+        final Task task = (Task) query.getSingleResult();
+        logger.info("returning " + task);
+        return task;
     }
 
     @Override
-    public void clear() {
-        taskMap.clear();
-    }
+    public void clear(EntityManager em) {
+        logger.info("task repo clear");
+        try {
 
-    @Override
-    public void saveAll(List<Task> tasks) {
-        tasks.forEach(task -> taskMap.put(task.getName(),task));
+            final Query query = em.createQuery("DELETE FROM Task");
+            em.getTransaction().begin();
+            final int result = query.executeUpdate();
+            logger.info("deleted rows ---------------------------------------------------: " + result);
+            em.getTransaction().commit();
+            em.close();
+        } catch (Exception e) {
+            if (em != null) {
+                em.getTransaction().rollback();
+                em.close();
+            }
+        }
     }
 
 }

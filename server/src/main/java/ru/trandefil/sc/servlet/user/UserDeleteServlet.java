@@ -24,7 +24,7 @@ public class UserDeleteServlet extends HttpServlet {
         logger.info("User delete doGet()");
         final String id = req.getParameter("id");
 //        final UserService userService = ServiceLocator.getUserService();
-        userService.deleteById(id);
+        userService.getById(id);
 //        req.getRequestDispatcher("/WEB-INF/view/user-list.jsp");
         resp.sendRedirect("users");
     }

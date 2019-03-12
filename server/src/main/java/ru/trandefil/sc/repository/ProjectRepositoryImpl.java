@@ -1,54 +1,100 @@
 package ru.trandefil.sc.repository;
 
+import lombok.NonNull;
 import ru.trandefil.sc.api.ProjectRepository;
 import ru.trandefil.sc.model.Project;
+import ru.trandefil.sc.util.UUIDUtil;
 
 import javax.enterprise.context.ApplicationScoped;
-import java.util.*;
-
-import static ru.trandefil.sc.util.EntityData.PROJECT1;
-import static ru.trandefil.sc.util.EntityData.PROJECT2;
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+import java.util.List;
+import java.util.logging.Logger;
 
 @ApplicationScoped
 public class ProjectRepositoryImpl implements ProjectRepository {
 
-    private Map<String, Project> projectMap = new HashMap<>();
+    private final Logger logger = Logger.getLogger(this.getClass().getName());
 
-    {
-        init();
-    }
-
-    private void init() {
-        projectMap.put(PROJECT1.getId(), PROJECT1);
-        projectMap.put(PROJECT2.getId(), PROJECT2);
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<Project> getAll(@NonNull final String userId, @NonNull final EntityManager em) {
+        final Query query = em.createQuery("select p from Project p left join p.user u where u.id = :userId");
+        query.setParameter("userId", userId);
+        final List<Project> projects = query.getResultList();
+        return projects;
     }
 
     @Override
-    public Project save(Project project) {
+    public List<Project> getAll(@NonNull final EntityManager em) {
+        final Query query = em.createQuery("select p from Project p");
+        final List<Project> projects = query.getResultList();
+        return projects;
+    }
+
+    @Override
+    public Project getByName(@NonNull final String userId, @NonNull final String name, @NonNull final EntityManager em) {
+        logger.info("task repo getByName");
+        final Query query = em.createQuery("select p from Project p where p.user.id = :userId and p.name = :name");
+        query.setParameter("userId", userId);
+        query.setParameter("name", name);
+        final Project project = (Project) query.getSingleResult();
+        return project;
+    }
+
+    @Override
+    public Project getById(@NonNull final String userId, @NonNull final String projectId, @NonNull final EntityManager em) {
+        logger.info("task repo getById");
+        final Query query = em.createQuery("select p from Project p where p.user.id = :userId and p.id = :projectId");
+        query.setParameter("userId", userId);
+        query.setParameter("projectId", projectId);
+        final Project project = (Project) query.getSingleResult();
+        return project;
+    }
+
+    @Override
+    public Project save(@NonNull final Project project, @NonNull final EntityManager em) {
+        logger.info("task repo save");
         if (project.isNew()) {
-            project.setId(UUID.randomUUID().toString());
+            project.setId(UUIDUtil.getUniqueString());
+            em.persist(project);
+            return project;
         }
-        return projectMap.put(project.getId(), project);
+        return em.merge(project);
     }
 
     @Override
-    public Project getById(String id) {
-        return projectMap.get(id);
+    public void delete(@NonNull final Project project, @NonNull final EntityManager em) {
+        logger.info("task repo delete");
+        em.remove(project);
     }
 
     @Override
-    public void delete(Project project) {
-        projectMap.remove(project.getId());
+    public boolean deleteByName(@NonNull final String userId, @NonNull final String projectName, @NonNull final EntityManager em) {
+        logger.info("task repo deleteByName");
+        Project project = getByName(userId, projectName, em);
+        if (project == null) {
+            logger.info("wrong project name.");
+            return false;
+        }
+        delete(project, em);
+        return true;
     }
 
     @Override
-    public List<Project> getAll() {
-        return new ArrayList<>(projectMap.values());
-    }
-
-    @Override
-    public void deleteById(String id) {
-        projectMap.remove(id);
+    public void clear(EntityManager em) {
+        try {
+            em.getTransaction().begin();
+            final Query query = em.createQuery("delete from Project");
+            query.executeUpdate();
+            em.getTransaction().commit();
+            em.close();
+        } catch (Exception e) {
+            if (em != null) {
+                em.getTransaction().rollback();
+                em.close();
+            }
+        }
     }
 
 }

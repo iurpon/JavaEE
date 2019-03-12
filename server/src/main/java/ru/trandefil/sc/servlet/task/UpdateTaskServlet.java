@@ -20,6 +20,7 @@ public class UpdateTaskServlet extends HttpServlet {
     @Inject
     private TaskService taskService;
 
+/*
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         logger.info("UpdateTaskServlet doPost()");
         final String id = request.getParameter("id");
@@ -50,5 +51,6 @@ public class UpdateTaskServlet extends HttpServlet {
         request.setAttribute("action", "update");
         request.getRequestDispatcher("/WEB-INF/view/editTask.jsp").forward(request, response);
     }
+*/
 
 }

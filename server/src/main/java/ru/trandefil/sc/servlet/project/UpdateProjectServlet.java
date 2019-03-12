@@ -26,7 +26,7 @@ public class UpdateProjectServlet extends HttpServlet {
     @Inject
     private TaskService taskService;
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+/*    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         logger.info("UpdateProjectServlet doPost()");
         final String id = request.getParameter("id");
         final String name = request.getParameter("name");
@@ -50,15 +50,15 @@ public class UpdateProjectServlet extends HttpServlet {
             }
         });
         response.sendRedirect("projects");
-    }
+    }*/
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+/*    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         logger.info("UpdateProjectServlet doGet()");
         final String id = request.getParameter("id");
         final Project project = projectService.getById(id);
         request.setAttribute("project", project);
         request.setAttribute("action", "update");
         request.getRequestDispatcher("/WEB-INF/view/editProject.jsp").forward(request, response);
-    }
+    }*/
 
 }

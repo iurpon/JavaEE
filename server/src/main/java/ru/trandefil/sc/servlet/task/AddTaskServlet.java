@@ -27,7 +27,7 @@ public class AddTaskServlet extends HttpServlet {
     @Inject
     private ProjectService projectService;
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+/*    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         final String projectId = request.getParameter("id");
         if (projectId.isEmpty() || projectId == null) {
             logger.info("error -------------------------------------------");
@@ -57,7 +57,7 @@ public class AddTaskServlet extends HttpServlet {
         final Task task = new Task(null, name, description, starting, ending, project);
         taskService.save(task);
         response.sendRedirect("tasks");
-    }
+    }*/
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         logger.info("AddTaskServlet doGet()");
