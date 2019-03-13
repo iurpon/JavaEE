@@ -14,20 +14,28 @@ public class SignatureUtil {
     private static Logger logger = Logger.getLogger(SignatureUtil.class.getName());
 
     private static String generateSignature(final String allFields) {
-        try (InputStream inputStream = ClassLoader.getSystemResourceAsStream("prop.properties")) {
+        logger.info("====================================================genarate signature");
+        logger.info("====================================================allFiels " + allFields);
+/*        try (InputStream inputStream = ClassLoader.getSystemResourceAsStream("src/main/webapp/resources/prop.properties")) {
+            logger.info("==================================================== properties  read. inputStream : " + inputStream);
             final Properties properties = new Properties();
             properties.load(inputStream);
-            final String salt = properties.getProperty("salt");
-            final int cycle = Integer.parseInt(properties.getProperty("cycle"));
-            final String superUniqie = getMultiHash(salt, cycle, allFields);
-            return superUniqie;
+
+
         } catch (Exception e) {
             e.printStackTrace();
-        }
-        return null;
+        }*/
+        logger.info("==================================================== properties  load");
+        final String salt = "SALT";//properties.getProperty("salt");
+        logger.info("==================================================== properties  salt read");
+        final int cycle = 564;//Integer.parseInt(properties.getProperty("cycle"));
+        logger.info("-----------------------------------------generating signa  with salt = " + salt);
+        final String superUniqie = getMultiHash(salt, cycle, allFields);
+        return superUniqie;
     }
 
     private static String getMultiHash(final String salt, final int cycle, final String allFields) {
+        logger.info("===========================================multi hash");
         final String solted = salt + allFields + salt;
         final String[] str = new String[1];
         str[0] = solted;
@@ -36,6 +44,7 @@ public class SignatureUtil {
     }
 
     public static String createSignature(final String id, final String userId, final long timeStamp, final Role role) {
+        logger.info("======================================== creating signature");
         final String sessionFields = id + userId + timeStamp + role.name();
         return generateSignature(sessionFields);
     }

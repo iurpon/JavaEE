@@ -53,4 +53,14 @@ public class Session extends AbstractEntity {
         this.role = role;
     }
 
+    @Override
+    public String toString() {
+        return "Session{" +
+                "timestamp=" + timestamp +
+                ", userId='" + userId + '\'' +
+                ", role=" + role +
+                ", signature='" + signature + '\'' +
+                ", id='" + id + '\'' +
+                '}';
+    }
 }

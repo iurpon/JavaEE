@@ -92,6 +92,7 @@ public class UserServiceImpl implements UserService {
         final String signature = SignatureUtil.createSignature(uuid, userId, timeStamp, role);
         final Session created = new Session(uuid, timeStamp, userId, role, signature);
 //        return sessionRepository.save(created, em);
+        logger.info("=============================================created session : " + created);
         return created;
     }
 
