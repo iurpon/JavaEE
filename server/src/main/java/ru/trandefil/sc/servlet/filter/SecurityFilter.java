@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
 @WebFilter("*")
@@ -18,6 +19,11 @@ public class SecurityFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
         logger.info("============================================= Security Filter init()");
+        try {
+            LogManager.getLogManager().readConfiguration(SecurityFilter.class.getResourceAsStream("logging.properties"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
