@@ -40,6 +40,6 @@ public class UserUpdateServlet extends HttpServlet {
         final String role = req.getParameter("role");
         final User user = new User(id, name, password, Enum.valueOf(Role.class, role));
         userService.save(user);
-        resp.sendRedirect("users");
+        resp.sendRedirect("wb/users");
     }
 }

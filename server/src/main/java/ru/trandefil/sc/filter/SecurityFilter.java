@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.logging.Logger;
 
-//@WebFilter("/*")
+@WebFilter("/web/*")
 public class SecurityFilter implements Filter {
 
     private Logger logger = Logger.getLogger(this.getClass().getName());
@@ -27,13 +27,22 @@ public class SecurityFilter implements Filter {
         HttpServletResponse response = (HttpServletResponse) resp;
 
         String servletPath = request.getServletPath();
+        String contextPath = request.getContextPath();
+        String pathInfo = request.getPathInfo();
+        logger.info("========================================================== contextPath :" + contextPath);
+        logger.info("========================================================== servletPath :" + servletPath);
+        logger.info("========================================================== pathInfo :" + pathInfo);
+        if(servletPath.contains("wsdl")){
+            chain.doFilter(request, response);
+            return;
+        }
 
         // Информация пользователя сохранена в Session
         // (После успешного входа в систему).
         User loginUser = SessionUtil.getLoginUser(request.getSession());
         logger.info("----------------------------- user READY ? : " + loginUser);
         logger.info("============================================== Servlet Path : " + servletPath);
-        if (servletPath.equals("/login")) {
+        if (servletPath.equals("/web/login")) {
             logger.info("============================================== Servlet Path equals /login: ");
             chain.doFilter(request, response);
 //            request.getRequestDispatcher("/WEB-INF/view/login.jsp").forward(request, response);
@@ -42,7 +51,8 @@ public class SecurityFilter implements Filter {
         if (loginUser == null) {
             logger.info("======================================= forward login form");
 //            request.getRequestDispatcher("/WEB-INF/view/login.jsp").forward(request, response);
-            response.sendRedirect("login");
+            final String redirect = request.getContextPath() +"/web/login" ;
+            response.sendRedirect(redirect);
             return;
         }
         chain.doFilter(request, response);

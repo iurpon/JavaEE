@@ -82,7 +82,7 @@ public class Bootstrap implements ServiceLocator {
     }
 
     public void init() {
-        getClassesAndFillMap("ru.trandefil.tm.command");
+        getClassesAndFillMap("ru.trandefil.sc.command");
         System.out.println("enter help to see commands.");
         while (true) {
             try {

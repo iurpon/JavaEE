@@ -16,9 +16,12 @@ import javax.inject.Singleton;
 import javax.jws.WebService;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 @WebService(endpointInterface = "ru.trandefil.sc.generated.ProjectEndPoint")
 public class ProjectEndPointImpl implements ProjectEndPoint {
+
+    private final Logger logger = Logger.getLogger(this.getClass().getName());
 
     @Inject
     private ProjectService projectService;
@@ -48,6 +51,7 @@ public class ProjectEndPointImpl implements ProjectEndPoint {
 
     @Override
     public List<ProjectDTO> getAllProjects(Session session) {
+        logger.info("============================================= ProjectEndPoint getAllProjects");
         if (!SignatureUtil.checkCorrectSession(session)) {
             System.out.println("bad signature.");
             throw new SecurityAuthentificationException("security authentification exception.");
