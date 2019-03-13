@@ -21,6 +21,7 @@
         <th>Name</th>
         <th>Description</th>
         <th>Project</th>
+        <th>Executor User</th>
         <th>Start Date</th>
         <th>End Date</th>
         <th>Action</th>
@@ -31,6 +32,7 @@
         <td>${task.name}</td>
         <td>${task.description}</td>
         <td>${task.project.name}</td>
+        <td>${task.executor.name}</td>
         <td><fmt:formatDate value="${task.start}" pattern="yyyy-MM-dd"/></td>
         <td><fmt:formatDate value="${task.end}" pattern="yyyy-MM-dd"/></td>
         <td><a href="updateTask?id=${task.id}">Update</a></td>

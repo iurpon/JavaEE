@@ -18,19 +18,27 @@
     <c:if test = "${actions eq 'create'}">
         <form method="post" action="addTask" class="ui-form">
             <h3>Input Task data</h3>
-            <input type="hidden" name="id" value="${projectId}">
+            <input type="hidden" name="projectId" value="${projectId}">
             <div class="form-row">
-                <input type="text"  id="name" name="name" required autocomplete="off"><label for="name">Name</label>
+                <input type="text"  id="username" name="username" required autocomplete="off">
+                <label for="username">Name of executor User</label>
             </div>
             <div class="form-row">
-                <input type="text"  id="description" name="description" required autocomplete="off"><label for="description">Description</label>
+                <input type="text"  id="name" name="name" required autocomplete="off">
+                <label for="name">Name</label>
             </div>
-                        <div class="form-row">
-                            <input type="date"  id="date" name="start" required autocomplete="off"><label for="date">Task start</label>
-                        </div>
-                                    <div class="form-row">
-                                        <input type="date"  id="date" name="end" required autocomplete="off"><label for="date">Task end</label>
-                                    </div>
+            <div class="form-row">
+                <input type="text"  id="description" name="description" required autocomplete="off">
+                <label for="description">Description</label>
+            </div>
+            <div class="form-row">
+                <input type="date"  id="date" name="start" required autocomplete="off">
+                <label for="date">Task start</label>
+            </div>
+            <div class="form-row">
+                <input type="date"  id="date" name="end" required autocomplete="off">
+                <label for="date">Task end</label>
+            </div>
             <p><input type="submit" value="Save"></p>
         </form>
     </c:if>
@@ -40,6 +48,7 @@
         <form method="post" action="updateTask" class="ui-form">
             <h3>Update Task data</h3>
             <input type="hidden" name="id" value="${task.id}">
+            <input type="hidden" name="projectId" value="${task.project.id}">
             <div class="form-row">
                 <input type="text" id="name"  value="${task.name}" name="name"
                        required autocomplete="off"><label for="name">Name</label>
@@ -52,14 +61,18 @@
                 <input type="text" id="project" value="${task.project.name}" name="projectName"
                        required autocomplete="off" readonly><label for="project">Project</label>
             </div>
-                        <div class="form-row">
-                            <input type="date" id="start" value="${task.start}" name="start"
-                                   required autocomplete="off" ><label for="start">Start Task</label>
-                        </div>
-                        <div class="form-row">
-                            <input type="date" id="end" value="${task.end}" name="end"
-                                   required autocomplete="off" ><label for="end">End Task</label>
-                        </div>
+            <div class="form-row">
+                <input type="date" id="start" value="${task.start}" name="start"
+                       required autocomplete="off" ><label for="start">Start Task</label>
+            </div>
+            <div class="form-row">
+                <input type="date" id="end" value="${task.end}" name="end"
+                       required autocomplete="off" ><label for="end">End Task</label>
+            </div>
+            <div class="form-row">
+                <input type="text" id="executorName" value="${task.executor.name}" name="executorName"
+                       required autocomplete="off" ><label for="executorName">Executor User</label>
+            </div>
             <p><input type="submit" value="Save"></p>
         </form>
     </c:if>

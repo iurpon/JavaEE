@@ -5,10 +5,6 @@
   http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
     <persistence-unit name="EM"
                       transaction-type="JTA">
-        <class>ru.trandefil.tm.entity.User</class>
-        <class>ru.trandefil.tm.entity.Project</class>
-        <class>ru.trandefil.tm.entity.Task</class>
-        <class>ru.trandefil.tm.entity.Session</class>
         <jta-data-source>java:/JNDI</jta-data-source>
         <properties>
             <property name="javax.persistence.provider" value="org.hibernate.jpa.HibernatePersistenceProvider"/>

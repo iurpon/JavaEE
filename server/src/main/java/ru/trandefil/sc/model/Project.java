@@ -5,6 +5,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -20,6 +22,9 @@ public class Project extends AbstractEntity {
 
     @ManyToOne(fetch = FetchType.EAGER)
     private User user;
+
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "project")
+    private List<Task> tasks = new ArrayList<>();
 
     public Project(String id, String name, String description, User user) {
         super(id);

@@ -81,7 +81,7 @@ public class TaskRepositoryImpl implements TaskRepository {
     @Override
     public Task getByid(@NonNull final String userId, @NonNull final String id, @NonNull final EntityManager em) {
         logger.info("repo getById");
-        final Query query = em.createQuery("select t from Task t where (t.assignee.id = :userId or t.executor.id = :userId) and dt.id = :id");
+        final Query query = em.createQuery("select t from Task t where (t.assignee.id = :userId or t.executor.id = :userId) and t.id = :id");
         query.setParameter("userId", userId);
         query.setParameter("id", id);
         final Task task = (Task) query.getSingleResult();

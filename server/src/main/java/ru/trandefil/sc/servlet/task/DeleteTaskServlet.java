@@ -1,6 +1,9 @@
 package ru.trandefil.sc.servlet.task;
 
 import ru.trandefil.sc.api.TaskService;
+import ru.trandefil.sc.model.Task;
+import ru.trandefil.sc.model.User;
+import ru.trandefil.sc.util.SessionUtil;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -23,10 +26,12 @@ public class DeleteTaskServlet extends HttpServlet {
         logger.info("DeleteTaskServlet doPost()");
     }
 
-/*    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         logger.info("DeleteTaskServlet doGet()");
         final String id = request.getParameter("id");
-        taskService.deletById(id);
+        final User current = SessionUtil.getLoginUser(request.getSession());
+        final Task byid = taskService.getByid(current.getId(), id);
+        taskService.delete(current.getId(),byid);
         response.sendRedirect("tasks");
-    }*/
+    }
 }
