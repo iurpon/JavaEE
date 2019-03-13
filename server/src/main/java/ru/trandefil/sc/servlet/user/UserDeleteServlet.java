@@ -1,6 +1,7 @@
 package ru.trandefil.sc.servlet.user;
 
 import ru.trandefil.sc.api.UserService;
+import ru.trandefil.sc.model.User;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -23,8 +24,8 @@ public class UserDeleteServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         logger.info("User delete doGet()");
         final String id = req.getParameter("id");
-        userService.getById(id);
-//        req.getRequestDispatcher("/WEB-INF/view/user-list.jsp");
+        final User byId = userService.getById(id);
+        userService.delete(byId);
         resp.sendRedirect("users");
     }
 

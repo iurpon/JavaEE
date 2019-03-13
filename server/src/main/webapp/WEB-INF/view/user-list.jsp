@@ -26,7 +26,7 @@
     </thead>
     <c:forEach items="${users}" var="user" varStatus="status">
     <tfoot>
-        <td>${user.userName}</td>
+        <td>${user.name}</td>
         <td>${user.role}</td>
         <td><a href="updateUser?id=${user.id}">Update</a></td>
         <td><a href="deleteUser?id=${user.id}">Delete</a></td>

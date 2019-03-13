@@ -21,7 +21,7 @@
         <h3>Update User data</h3>
         <input type="hidden" name="id" value="${user.id}">
         <div class="form-row">
-            <input type="text" id="name" value="${user.userName}" name="name" required autocomplete="off"><label
+            <input type="text" id="name" value="${user.name}" name="name" required autocomplete="off"><label
                 for="name">Name</label>
         </div>
         <div class="form-row">
