@@ -9,7 +9,7 @@ import javax.jws.WebService;
 import java.util.Date;
 import java.util.List;
 
-@WebService
+//@WebService
 public interface TaskEndPoint {
 
     @WebMethod

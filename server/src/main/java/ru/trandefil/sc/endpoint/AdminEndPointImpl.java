@@ -14,7 +14,7 @@ import javax.jws.WebMethod;
 import javax.jws.WebService;
 
 @Singleton
-@WebService(endpointInterface = "ru.trandefil.tm.generated.AdminEndPoint")
+//@WebService(endpointInterface = "ru.trandefil.tm.generated.AdminEndPoint")
 public class AdminEndPointImpl implements AdminEndPoint {
 
     @Inject

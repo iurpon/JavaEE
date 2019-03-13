@@ -15,7 +15,6 @@ import javax.persistence.EntityManager;
 import java.util.List;
 
 @ApplicationScoped
-@Alternative
 public class ProjectServiceImpl implements ProjectService {
 
     @Inject

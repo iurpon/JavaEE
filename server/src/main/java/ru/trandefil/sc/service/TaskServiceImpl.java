@@ -14,7 +14,6 @@ import javax.persistence.EntityManager;
 import java.util.List;
 
 @ApplicationScoped
-@Alternative
 public class TaskServiceImpl implements TaskService {
 
     @Inject

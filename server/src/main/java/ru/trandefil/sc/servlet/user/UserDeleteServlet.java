@@ -23,7 +23,6 @@ public class UserDeleteServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         logger.info("User delete doGet()");
         final String id = req.getParameter("id");
-//        final UserService userService = ServiceLocator.getUserService();
         userService.getById(id);
 //        req.getRequestDispatcher("/WEB-INF/view/user-list.jsp");
         resp.sendRedirect("users");
