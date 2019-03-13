@@ -25,7 +25,7 @@ public class ProjectListServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         logger.info("ProjectLIstServlet doGet");
         List<Project> list = projectService.getAll();
-        req.setAttribute("items", list);
+        req.setAttribute("projects", list);
         req.setCharacterEncoding("UTF-8");
         req.getRequestDispatcher("/WEB-INF/view/project-list.jsp").forward(req, resp);
     }

@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.logging.Logger;
 
-//@WebFilter("/*")
+@WebFilter("/*")
 public class SecurityFilter implements Filter {
 
     private Logger logger = Logger.getLogger(this.getClass().getName());
@@ -41,8 +41,8 @@ public class SecurityFilter implements Filter {
         }
         if (loginUser == null) {
             logger.info("======================================= forward login form");
-            request.getRequestDispatcher("/WEB-INF/view/login.jsp").forward(request, response);
-//            response.sendRedirect("login");
+//            request.getRequestDispatcher("/WEB-INF/view/login.jsp").forward(request, response);
+            response.sendRedirect("login");
             return;
         }
         chain.doFilter(request, response);

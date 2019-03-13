@@ -25,6 +25,9 @@
             <div class="form-row">
                 <input type="text" id="description" value="${project.description}" name="description" required autocomplete="off"><label for="description">Description</label>
             </div>
+            <div class="form-row">
+                <input type="text" id="user" value="${project.user.name}" name="user"  required  autocomplete="off" readonly><label for="user">User</label>
+            </div>
             <p><input type="submit" value="Save"></p>
         </form>
     </c:if>

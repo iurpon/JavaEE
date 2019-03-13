@@ -2,6 +2,8 @@ package ru.trandefil.sc.servlet.project;
 
 import ru.trandefil.sc.api.ProjectService;
 import ru.trandefil.sc.model.Project;
+import ru.trandefil.sc.model.User;
+import ru.trandefil.sc.util.SessionUtil;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -20,7 +22,7 @@ public class AddProjectServlet extends HttpServlet {
     @Inject
     private ProjectService projectService;
 
-/*    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         logger.info("AddProjectServlet doPost()");
         final String name = request.getParameter("name");
         if(name.isEmpty() || name == null){
@@ -34,10 +36,11 @@ public class AddProjectServlet extends HttpServlet {
             response.sendRedirect("error");
             return;
         }
-        final Project project = new Project(null, name, description);
-        projectService.save(project);
+        final User current = SessionUtil.getLoginUser(request.getSession());
+/*        final Project project = new Project(null, name, description,current);*/
+        projectService.save(current.getId(),name,description);
         response.sendRedirect("projects");
-    }*/
+    }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         logger.info("AddProjectServlet doGet()");

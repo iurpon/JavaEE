@@ -2,7 +2,10 @@ package ru.trandefil.sc.servlet.project;
 
 import ru.trandefil.sc.api.ProjectService;
 import ru.trandefil.sc.api.TaskService;
+import ru.trandefil.sc.model.Project;
 import ru.trandefil.sc.model.Task;
+import ru.trandefil.sc.model.User;
+import ru.trandefil.sc.util.SessionUtil;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -30,16 +33,18 @@ public class DeleteProjectServlet extends HttpServlet {
         logger.info("DeleteProjectServlet doPost()");
     }
 
-/*    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         logger.info("DeleteProjectServlet doGet()");
         final String id = request.getParameter(("id"));
-        projectService.deleteById(id);
-        final List<Task> taskList = taskService.getAll();
+        final User current = SessionUtil.getLoginUser(request.getSession());
+        final Project byId = projectService.getById(id, current.getId());
+        projectService.delete(current.getId(),byId);
+/*        final List<Task> taskList = taskService.getAll();
         final List<Task> collect = taskList.stream().filter(task -> !task.getProject().getId().equals(id))
                 .collect(Collectors.toList());
         taskService.clear();
-        taskService.saveAll(collect);
+        taskService.saveAll(collect);*/
         response.sendRedirect("projects");
-    }*/
+    }
 
 }

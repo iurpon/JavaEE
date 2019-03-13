@@ -4,8 +4,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -14,11 +15,16 @@ import javax.persistence.Table;
 @Table(name = "users")
 public class User extends AbstractEntity {
 
+    @Column(unique = true)
     private String name;
 
     private String password;
 
+    @Enumerated(value = EnumType.STRING)
     private Role role;
+
+    @OneToMany(mappedBy = "user",fetch = FetchType.LAZY)
+    private List<Project> projects = new ArrayList<>();
 
     public User(String id, String name, String password, Role role) {
         super(id);

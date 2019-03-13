@@ -6,15 +6,16 @@ import ru.trandefil.sc.api.ProjectService;
 import ru.trandefil.sc.api.UserService;
 import ru.trandefil.sc.model.Project;
 import ru.trandefil.sc.model.User;
-import ru.trandefil.sc.util.EMFactoryUtil;
 
 import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.Alternative;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 import java.util.List;
 
 @ApplicationScoped
+@Transactional
 public class ProjectServiceImpl implements ProjectService {
 
     @Inject
@@ -22,6 +23,9 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Inject
     private UserService userService;
+
+    @PersistenceContext(unitName = "EM")
+    private EntityManager entityManager;
 
     @Override
     public Project save(@NonNull final String userId, @NonNull final String name, @NonNull final String description) {
@@ -42,12 +46,14 @@ public class ProjectServiceImpl implements ProjectService {
                 em.close();
             }
         }*/
-        return null;
+        final User user = userService.getById(userId);
+        final Project project = new Project(null, name, description, user);
+        return projectRepository.save(project, entityManager);
     }
 
     @Override
     public Project update(@NonNull final Project project) {
-        EntityManager em = null;
+/*        EntityManager em = null;
         try {
             em = EMFactoryUtil.getEntityManager();
             em.getTransaction().begin();
@@ -61,36 +67,40 @@ public class ProjectServiceImpl implements ProjectService {
                 em.close();
             }
         }
-        return null;
+        return null;*/
+        return projectRepository.save(project, entityManager);
     }
 
     @Override
     public List<Project> getAll(@NonNull final String userId) {
-        final EntityManager em = EMFactoryUtil.getEntityManager();
+/*        final EntityManager em = EMFactoryUtil.getEntityManager();
         final List<Project> projects = projectRepository.getAll(userId, em);
         em.close();
-        return projects;
+        return projects;*/
+        return projectRepository.getAll(userId, entityManager);
     }
 
     @Override
     public List<Project> getAll() {
-        final EntityManager em = EMFactoryUtil.getEntityManager();
+/*         final EntityManager em = EMFactoryUtil.getEntityManager();
         final List<Project> projects = projectRepository.getAll(em);
         em.close();
-        return projects;
+        return projects;*/
+        return projectRepository.getAll(entityManager);
     }
 
     @Override
     public Project getById(@NonNull final String id, @NonNull final String userId) {
-        final EntityManager em = EMFactoryUtil.getEntityManager();
+/*        final EntityManager em = EMFactoryUtil.getEntityManager();
         final Project project = projectRepository.getById(userId, id, em);
         em.close();
-        return project;
+        return project;*/
+        return projectRepository.getById(userId, id, entityManager);
     }
 
     @Override
-    public void delete(@NonNull String userId, @NonNull Project project) {
-        EntityManager em = null;
+    public void delete(@NonNull final String userId, @NonNull final Project project) {
+/*        EntityManager em = null;
         try {
             em = EMFactoryUtil.getEntityManager();
             em.getTransaction().begin();
@@ -102,12 +112,16 @@ public class ProjectServiceImpl implements ProjectService {
                 em.getTransaction().rollback();
                 em.close();
             }
+        }*/
+        final Project byId = projectRepository.getById(userId, project.getId(), entityManager);
+        if (byId != null) {
+            projectRepository.delete(byId, entityManager);
         }
     }
 
     @Override
     public boolean deleteByName(@NonNull final String userId, @NonNull final String projectName) {
-        EntityManager em = null;
+/*        EntityManager em = null;
         try {
             em = EMFactoryUtil.getEntityManager();
             em.getTransaction().begin();
@@ -122,16 +136,18 @@ public class ProjectServiceImpl implements ProjectService {
                 em.close();
             }
         }
-        return false;
+        return false;*/
+        return projectRepository.deleteByName(userId, projectName, entityManager);
     }
 
     @Override
     public Project getByName(@NonNull String projectName, @NonNull String userId) {
-        EntityManager em = EMFactoryUtil.getEntityManager();
+/*        EntityManager em = EMFactoryUtil.getEntityManager();
         em.getTransaction().begin();
         final Project project = projectRepository.getByName(userId, projectName, em);
         em.close();
-        return project;
+        return project;*/
+        return projectRepository.getByName(userId, projectName, entityManager);
     }
 
 }
