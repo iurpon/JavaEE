@@ -8,4 +8,6 @@ public interface SessionService {
 
     Session save(Session session);
 
+    Session getById(String id);
+
 }

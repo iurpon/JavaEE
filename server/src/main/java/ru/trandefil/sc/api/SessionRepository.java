@@ -15,4 +15,6 @@ public interface SessionRepository {
 
     List<Session> getAll(EntityManager em);
 
+    Session getById(String id, EntityManager em);
+
 }

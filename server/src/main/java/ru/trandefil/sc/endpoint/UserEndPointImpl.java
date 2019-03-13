@@ -9,6 +9,7 @@ import ru.trandefil.sc.generated.UserEndPoint;
 import ru.trandefil.sc.model.Role;
 import ru.trandefil.sc.model.Session;
 import ru.trandefil.sc.model.User;
+import ru.trandefil.sc.util.HashUtil;
 import ru.trandefil.sc.util.SignatureUtil;
 
 import javax.inject.Inject;
@@ -82,7 +83,7 @@ public class UserEndPointImpl implements UserEndPoint {
 
     @Override
     @WebMethod
-    public Session getSession(@NonNull String userName, @NonNull String password) {
+    public Session getSession(@NonNull final String userName, @NonNull final String password) {
         logger.info("---------------------------------------- getSession");
         return userService.getSession(userName, password);
     }
@@ -118,9 +119,13 @@ public class UserEndPointImpl implements UserEndPoint {
     }
 
     @Override
-    public Session registry(String userName, String password) {
-//        userService.save(new User(null, userName, HashUtil.hashPassword(password), Role.USER));
-        return getSession(userName, password);
+    public Session registry(@NonNull final String userName, @NonNull final String password) {
+        logger.info("================================ user endpoint registry");
+        final User user = userService.constractUser(userName, password, "user");
+        logger.info("=====================================created user " + user);
+        final Session session = getSession(userName, password);
+        logger.info("===================================== created Session " + session);
+        return session;
     }
 
     private UserDTO getDTO(@NonNull User user) {

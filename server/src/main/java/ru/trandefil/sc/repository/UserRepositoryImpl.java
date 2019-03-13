@@ -25,6 +25,7 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public User getLogged(@NonNull final String login, @NonNull final String pass, @NonNull final EntityManager em) {
+        logger.info("========================================================== user repository getLogged");
         final Query query = em.createQuery("Select u FROM User u WHERE u.name = :name and u.password = :password");
         query.setParameter("name", login);
         query.setParameter("password", pass);

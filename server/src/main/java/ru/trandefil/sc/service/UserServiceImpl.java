@@ -2,6 +2,7 @@ package ru.trandefil.sc.service;
 
 import lombok.NonNull;
 import ru.trandefil.sc.api.SessionRepository;
+import ru.trandefil.sc.api.SessionService;
 import ru.trandefil.sc.api.UserRepository;
 import ru.trandefil.sc.api.UserService;
 import ru.trandefil.sc.exception.RepositoryLayerException;
@@ -29,7 +30,7 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
 
     @Inject
-    private SessionRepository sessionRepository;
+    private SessionService sessionService;
 
     @PersistenceContext(unitName = "EM")
     private EntityManager entityManager;
@@ -74,7 +75,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public Session getSession(@NonNull final String userName, @NonNull final String userPassword) {
         logger.info("====================================================get session");
-        final User user = userRepository.getLogged(userName, userPassword, entityManager);
+        final User user = userRepository.getLogged(userName, HashUtil.hashPassword(userPassword), entityManager);
         if (user == null) {
             logger.info("---------------------------------------------------- bad user credential");
             return null;
@@ -91,7 +92,7 @@ public class UserServiceImpl implements UserService {
         final long timeStamp = System.nanoTime();
         final String signature = SignatureUtil.createSignature(uuid, userId, timeStamp, role);
         final Session created = new Session(uuid, timeStamp, userId, role, signature);
-//        return sessionRepository.save(created, em);
+        sessionService.save(created);
         logger.info("=============================================created session : " + created);
         return created;
     }
@@ -99,21 +100,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void logout(@NonNull final Session session) {
-        EntityManager em = null;
-        try {
-            em = EMFactoryUtil.getEntityManager();
-            em.getTransaction().begin();
-            sessionRepository.delete(session, em);
-            em.getTransaction().commit();
-            em.close();
-        } catch (Exception e) {
-            if (em != null) {
-                em.getTransaction().rollback();
-                em.close();
-            }
-            e.getMessage();
-            throw new RepositoryLayerException(e.getMessage());
-        }
+        sessionService.delete(session);
     }
 
     @Override

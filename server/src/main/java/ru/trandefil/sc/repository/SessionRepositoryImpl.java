@@ -18,37 +18,36 @@ public class SessionRepositoryImpl implements SessionRepository {
 
     @Override
     public void delete(@NonNull final Session session, @NonNull final EntityManager em) {
-        logger.info("delete session repo");
+        logger.info("=================================delete session repo");
         em.remove(session);
     }
 
     @Override
     public Session save(@NonNull final Session session, @NonNull final EntityManager em) {
-        logger.info("save session repo");
+        logger.info("===================================save session repo");
         em.persist(session);
         return session;
     }
 
     @Override
     public void clear(EntityManager em) {
-        try {
-            em.getTransaction().begin();
+        logger.info("clear session repo");
             final Query query = em.createQuery("delete from Session");
             query.executeUpdate();
-            em.getTransaction().commit();
-            em.close();
-        } catch (Exception e) {
-            if (em != null) {
-                em.getTransaction().rollback();
-                em.close();
-            }
-        }
     }
 
     @Override
     public List<Session> getAll(EntityManager em) {
+        logger.info("===================================getAll session repo");
         final Query query = em.createQuery("select s from Session s");
         return (List<Session>)query.getResultList();
     }
 
+    @Override
+    public Session getById(String id, EntityManager em) {
+        logger.info("===================================getById session repo");
+        final Query query = em.createQuery("select s from Sessions where s.id = :id");
+        query.setParameter("id",id);
+        return (Session)query.getSingleResult();
+    }
 }

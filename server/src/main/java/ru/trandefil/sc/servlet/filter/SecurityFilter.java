@@ -27,12 +27,10 @@ public class SecurityFilter implements Filter {
         HttpServletResponse response = (HttpServletResponse) resp;
 
         String servletPath = request.getServletPath();
-        String contextPath = request.getContextPath();
-        String pathInfo = request.getPathInfo();
-        logger.info("========================================================== contextPath :" + contextPath);
         logger.info("========================================================== servletPath :" + servletPath);
-        logger.info("========================================================== pathInfo :" + pathInfo);
+
         if(servletPath.contains("EndPoint")){
+            logger.info("======================================== THIS IS ENDPOINT NO SECURITY");
             chain.doFilter(request, response);
             return;
         }
