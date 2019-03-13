@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.logging.Logger;
 
-@WebServlet("/web/addUser")
+@WebServlet("/addUser")
 public class UserCreateServlet extends HttpServlet {
 
     private Logger logger = Logger.getLogger(this.getClass().getName());

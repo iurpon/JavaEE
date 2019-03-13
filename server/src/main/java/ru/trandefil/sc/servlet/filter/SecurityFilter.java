@@ -1,4 +1,4 @@
-package ru.trandefil.sc.filter;
+package ru.trandefil.sc.servlet.filter;
 
 import ru.trandefil.sc.model.User;
 import ru.trandefil.sc.util.SessionUtil;
@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.logging.Logger;
 
-@WebFilter("/web/*")
+@WebFilter("*")
 public class SecurityFilter implements Filter {
 
     private Logger logger = Logger.getLogger(this.getClass().getName());
@@ -32,7 +32,7 @@ public class SecurityFilter implements Filter {
         logger.info("========================================================== contextPath :" + contextPath);
         logger.info("========================================================== servletPath :" + servletPath);
         logger.info("========================================================== pathInfo :" + pathInfo);
-        if(servletPath.contains("wsdl")){
+        if(servletPath.contains("EndPoint")){
             chain.doFilter(request, response);
             return;
         }
