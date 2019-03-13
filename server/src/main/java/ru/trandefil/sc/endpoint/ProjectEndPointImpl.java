@@ -17,8 +17,7 @@ import javax.jws.WebService;
 import java.util.ArrayList;
 import java.util.List;
 
-@Singleton
-@WebService(endpointInterface = "ru.trandefil.tm.generated.ProjectEndPoint")
+@WebService(endpointInterface = "ru.trandefil.sc.generated.ProjectEndPoint")
 public class ProjectEndPointImpl implements ProjectEndPoint {
 
     @Inject
@@ -43,9 +42,8 @@ public class ProjectEndPointImpl implements ProjectEndPoint {
             System.out.println("bad signature.");
             throw new SecurityAuthentificationException("security authentification exception.");
         }
-/*        final Project updated = projectService.update(fromDTO(project));
-        return getDTOproject(updated);*/
-        return null;
+        final Project updated = projectService.update(fromDTO(project));
+        return getDTOproject(updated);
     }
 
     @Override
@@ -74,8 +72,8 @@ public class ProjectEndPointImpl implements ProjectEndPoint {
             System.out.println("bad signature.");
             throw new SecurityAuthentificationException("security authentification exception.");
         }
-/*        final Project project = fromDTO(projectDTO);
-        projectService.delete(session.getUserId(), project);*/
+        final Project project = fromDTO(projectDTO);
+        projectService.delete(session.getUserId(), project);
     }
 
     @Override
@@ -111,10 +109,10 @@ public class ProjectEndPointImpl implements ProjectEndPoint {
         return projectDTOList;
     }
 
-/*    private Project fromDTO(@NonNull ProjectDTO dto) {
+    private Project fromDTO(@NonNull ProjectDTO dto) {
         final User user = userService.getByName(dto.getUserName());
         final Project project = new Project(dto.getId(), dto.getName(), dto.getDescription(), user);
         return project;
-    }*/
+    }
 
 }

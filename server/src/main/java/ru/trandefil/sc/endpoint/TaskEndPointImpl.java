@@ -23,8 +23,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 
-@Singleton
-@WebService(endpointInterface = "ru.trandefil.tm.generated.TaskEndPoint")
+@WebService(endpointInterface = "ru.trandefil.sc.generated.TaskEndPoint")
 public class TaskEndPointImpl implements TaskEndPoint {
 
     private Logger logger = Logger.getLogger(this.getClass().getName());

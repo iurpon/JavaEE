@@ -33,10 +33,10 @@
                         <configuration>
                             <sourceRoot>${project.basedir}/src/main/java</sourceRoot>
                             <wsdlOptions>
-<!--                                <wsdlOption>
+                                <wsdlOption>
                                     <wsdl>http://localhost:8080/JavaEE/UserEndPointImpl?wsdl</wsdl>
-                                </wsdlOption>-->
-<!--                                <wsdlOption>
+                                </wsdlOption>
+                                <wsdlOption>
                                     <wsdl>http://localhost:8080/JavaEE/ProjectEndPointImpl?wsdl</wsdl>
                                 </wsdlOption>
                                 <wsdlOption>
@@ -44,7 +44,7 @@
                                 </wsdlOption>
                                 <wsdlOption>
                                     <wsdl>http://localhost:8080/JavaEE/AdminEndPointImpl?wsdl</wsdl>
-                                </wsdlOption>-->
+                                </wsdlOption>
                             </wsdlOptions>
                         </configuration>
                         <goals>

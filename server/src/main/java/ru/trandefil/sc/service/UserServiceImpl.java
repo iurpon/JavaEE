@@ -74,30 +74,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public Session getSession(@NonNull final String userName, @NonNull final String userPassword) {
         logger.info("get session");
-        EntityManager em = null;
-        try {
-            em = EMFactoryUtil.getEntityManager();
-            em.getTransaction().begin();
-            final User user = userRepository.getLogged(userName, HashUtil.hashPassword(userPassword), em);
-            if (user == null) {
-                System.out.println("bad login.");
-                return null;
-            }
-            logger.info("get form base user : " + user);
-            final Session newSess = createNewSession(user.getId(), user.getRole(), em);
-            logger.info("created session : " + newSess);
-            em.getTransaction().commit();
-            em.close();
-            System.out.println("logged " + user.getName());
-            return newSess;
-        } catch (Exception e) {
-            if (em != null) {
-                em.getTransaction().rollback();
-                em.close();
-            }
-            e.getMessage();
+        final User user = userRepository.getLogged(userName, HashUtil.hashPassword(userPassword), entityManager);
+        if (user == null) {
+            System.out.println("bad login.");
+            return null;
         }
-        return null;
+        logger.info("get form base user : " + user);
+        final Session newSess = createNewSession(user.getId(), user.getRole(), entityManager);
+        logger.info("created session : " + newSess);
+        return newSess;
     }
 
     private Session createNewSession(@NonNull final String userId, @NonNull final Role role, @NonNull final EntityManager em) {
@@ -106,8 +91,10 @@ public class UserServiceImpl implements UserService {
         final long timeStamp = System.nanoTime();
         final String signature = SignatureUtil.createSignature(uuid, userId, timeStamp, role);
         final Session created = new Session(uuid, timeStamp, userId, role, signature);
-        return sessionRepository.save(created, em);
+//        return sessionRepository.save(created, em);
+        return created;
     }
+
 
     @Override
     public void logout(@NonNull final Session session) {

@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.logging.Logger;
 
-@WebFilter("/*")
+//@WebFilter("/*")
 public class SecurityFilter implements Filter {
 
     private Logger logger = Logger.getLogger(this.getClass().getName());
