@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Singleton
-//@WebService(endpointInterface = "ru.trandefil.tm.generated.ProjectEndPoint")
+@WebService(endpointInterface = "ru.trandefil.tm.generated.ProjectEndPoint")
 public class ProjectEndPointImpl implements ProjectEndPoint {
 
     @Inject

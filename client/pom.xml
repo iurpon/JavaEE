@@ -36,15 +36,15 @@
 <!--                                <wsdlOption>
                                     <wsdl>http://localhost:8080/JavaEE/UserEndPointImpl?wsdl</wsdl>
                                 </wsdlOption>-->
-        <!--                                <wsdlOption>
-                                            <wsdl>http://localhost:8080/projectEndPoint?wsdl</wsdl>
-                                        </wsdlOption>
-                                        <wsdlOption>
-                                            <wsdl>http://localhost:8080/taskEndPoint?wsdl</wsdl>
-                                        </wsdlOption>
-                                        <wsdlOption>
-                                            <wsdl>http://localhost:8080/adminEndPoint?wsdl</wsdl>
-                                        </wsdlOption>-->
+<!--                                <wsdlOption>
+                                    <wsdl>http://localhost:8080/JavaEE/ProjectEndPointImpl?wsdl</wsdl>
+                                </wsdlOption>
+                                <wsdlOption>
+                                    <wsdl>http://localhost:8080/JavaEE/TaskEndPointImpl?wsdl</wsdl>
+                                </wsdlOption>
+                                <wsdlOption>
+                                    <wsdl>http://localhost:8080/JavaEE/AdminEndPointImpl?wsdl</wsdl>
+                                </wsdlOption>-->
                             </wsdlOptions>
                         </configuration>
                         <goals>

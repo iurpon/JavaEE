@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Singleton
-//@WebService(endpointInterface = "ru.trandefil.tm.generated.UserEndPoint")
+@WebService(endpointInterface = "ru.trandefil.tm.generated.UserEndPoint")
 public class UserEndPointImpl implements UserEndPoint {
 
     @Inject
