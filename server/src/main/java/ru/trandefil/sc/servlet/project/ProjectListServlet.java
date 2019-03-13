@@ -2,6 +2,8 @@ package ru.trandefil.sc.servlet.project;
 
 import ru.trandefil.sc.api.ProjectService;
 import ru.trandefil.sc.model.Project;
+import ru.trandefil.sc.model.User;
+import ru.trandefil.sc.util.SessionUtil;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -24,7 +26,8 @@ public class ProjectListServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         logger.info("ProjectLIstServlet doGet");
-        List<Project> list = projectService.getAll();
+        final User current = SessionUtil.getLoginUser(req.getSession());
+        final List<Project> list = projectService.getAll(current.getId());
         req.setAttribute("projects", list);
         req.setCharacterEncoding("UTF-8");
         req.getRequestDispatcher("/WEB-INF/view/project-list.jsp").forward(req, resp);

@@ -10,7 +10,9 @@
 <body>
     <ul class="menu">
         <li><a class="menu" href="projects">See all Project</a></li>
-        <li><a class="menu" href="index.html">Home</a></li>
+        <li><a class="menu" href="users">See all Users</a></li>
+        <li><a class="menu" href="tasks">See all Tasks</a></li>
+        <li><a class="menu" href="hello">Home</a></li>
     </ul>
     <c:set var="actions" value="${action}"/>
     <c:if test = "${actions eq 'create'}">

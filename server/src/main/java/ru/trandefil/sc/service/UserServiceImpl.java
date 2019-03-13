@@ -17,7 +17,6 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.logging.Logger;
@@ -39,104 +38,36 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void delete(@NonNull final User user) {
-/*        EntityManager em = null;
-        try {
-            em = EMFactoryUtil.getEntityManager();
-            em.getTransaction().begin();
-            userRepository.delete(user, em);
-            em.getTransaction().commit();
-            em.close();
-        } catch (Exception e) {
-            if (em != null) {
-                em.getTransaction().rollback();
-                em.close();
-            }
-            throw new RepositoryLayerException(e.getMessage());
-        }*/
         userRepository.delete(user, entityManager);
     }
 
     @Override
     public boolean deleteByName(@NonNull final String name) {
-/*        EntityManager em = null;
-        try {
-            em = EMFactoryUtil.getEntityManager();
-            em.getTransaction().begin();
-            final boolean isDeleted = userRepository.deleteByName(name, em);
-            em.getTransaction().commit();
-            em.close();
-            return isDeleted;
-        } catch (Exception e) {
-            if (em != null) {
-                em.getTransaction().rollback();
-                em.close();
-            }
-            throw new RepositoryLayerException(e.getMessage());
-        }*/
         return userRepository.deleteByName(name, entityManager);
     }
 
     @Override
     public User save(@NonNull final User user) {
-/*        if (user.isNew()) {
-            user.setId(UUIDUtil.getUniqueString());
-        }
-        EntityManager em = null;
-        try {
-            em = EMFactoryUtil.getEntityManager();
-            em.getTransaction().begin();
-            userRepository.saveOrUpdate(user, em);
-            em.getTransaction().commit();
-            em.close();
-            return user;
-        } catch (Exception e) {
-            if (em != null) {
-                em.getTransaction().rollback();
-                em.close();
-            }
-            throw new RepositoryLayerException(e.getMessage());
-        }*/
         return userRepository.saveOrUpdate(user, entityManager);
     }
 
     @Override
     public User getByName(@NonNull final String userName) {
-/*        final EntityManager em = EMFactoryUtil.getEntityManager();
-        em.getTransaction().begin();
-        final User user = userRepository.findByName(userName, em);
-        em.close();
-        return user;*/
         return userRepository.findByName(userName, entityManager);
     }
 
     @Override
     public User getRefById(@NonNull final String userId) {
-/*        final EntityManager em = EMFactoryUtil.getEntityManager();
-        em.getTransaction().begin();
-        final User ref = userRepository.getRef(userId, em);
-        em.close();
-        return ref;*/
         return userRepository.getRef(userId, entityManager);
     }
 
     @Override
     public User getById(@NonNull final String id) {
-/*        final EntityManager em = EMFactoryUtil.getEntityManager();
-        em.getTransaction().begin();
-        final User user = userRepository.getById(id, em);
-        em.close();
-        return user;*/
         return userRepository.getById(id, entityManager);
     }
 
     @Override
     public List<User> getAll() {
-/*        final EntityManager em = EMFactoryUtil.getEntityManager();
-        em.getTransaction().begin();
-        final List<User> users = userRepository.getAll(em);
-        em.close();
-        return users;
-        return userRepository.getAll(entityManager);*/
         return userRepository.getAll(entityManager);
     }
 

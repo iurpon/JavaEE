@@ -10,7 +10,7 @@
 <p>
 <ul class="menu">
     <li><a class="menu" href="projects">See all Project</a></li>
-    <li><a class="menu" href="index.html">Home</a></li>
+    <li><a class="menu" href="hello">Home</a></li>
     <li><a class="menu" href="logout">Logout</a></li>
     <li><a class="menu" href="tasks">See all Tasks</a></li>
     <li><a class="menu" href="addUser">Add New User</a></li>
