@@ -3,16 +3,15 @@ package ru.trandefil.sc.endpoint;
 import lombok.NonNull;
 import ru.trandefil.sc.api.UserService;
 import ru.trandefil.sc.dto.UserDTO;
-import ru.trandefil.sc.model.Role;
-import ru.trandefil.sc.model.Session;
-import ru.trandefil.sc.model.User;
 import ru.trandefil.sc.exception.SecurityAuthentificationException;
 import ru.trandefil.sc.exception.SecurityAuthorizationException;
 import ru.trandefil.sc.generated.UserEndPoint;
+import ru.trandefil.sc.model.Role;
+import ru.trandefil.sc.model.Session;
+import ru.trandefil.sc.model.User;
 import ru.trandefil.sc.util.SignatureUtil;
 
 import javax.inject.Inject;
-import javax.inject.Singleton;
 import javax.jws.WebMethod;
 import javax.jws.WebService;
 import java.util.ArrayList;
@@ -61,7 +60,7 @@ public class UserEndPointImpl implements UserEndPoint {
             throw new SecurityAuthentificationException("security authentification exception.");
         }
         final User user = userService.getByName(userName);
-        if(user == null){
+        if (user == null) {
             return null;
         }
         return getDTO(user);
