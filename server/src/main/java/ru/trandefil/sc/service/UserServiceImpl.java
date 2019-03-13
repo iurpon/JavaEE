@@ -73,10 +73,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Session getSession(@NonNull final String userName, @NonNull final String userPassword) {
-        logger.info("get session");
-        final User user = userRepository.getLogged(userName, HashUtil.hashPassword(userPassword), entityManager);
+        logger.info("====================================================get session");
+        final User user = userRepository.getLogged(userName, userPassword, entityManager);
         if (user == null) {
-            System.out.println("bad login.");
+            logger.info("---------------------------------------------------- bad user credential");
             return null;
         }
         logger.info("get form base user : " + user);

@@ -6,9 +6,12 @@ import ru.trandefil.sc.exception.SecurityAuthentificationException;
 
 import java.io.InputStream;
 import java.util.Properties;
+import java.util.logging.Logger;
 import java.util.stream.IntStream;
 
 public class SignatureUtil {
+
+    private static Logger logger = Logger.getLogger(SignatureUtil.class.getName());
 
     private static String generateSignature(final String allFields) {
         try (InputStream inputStream = ClassLoader.getSystemResourceAsStream("prop.properties")) {
@@ -39,22 +42,27 @@ public class SignatureUtil {
 
     public static boolean checkCorrectSession(Session session) {
         if (session == null) {
-            System.out.println("session is null");
+            logger.info("======================================session is null");
             throw new SecurityAuthentificationException("bad security.");
         }
         if (session.getId() == null) {
+            logger.info("======================================session.getId is null");
             throw new SecurityAuthentificationException("bad security.");
         }
         if (session.getRole() == null) {
+            logger.info("======================================session.getRole is null");
             throw new SecurityAuthentificationException("bad security.");
         }
         if (session.getUserId() == null) {
+            logger.info("======================================session.getUserId is null");
             throw new SecurityAuthentificationException("bad security.");
         }
         if (session.getTimestamp() == 0) {
+            logger.info("======================================session.getTimestamp is null");
             throw new SecurityAuthentificationException("bad security.");
         }
         if (session.getSignature() == null) {
+            logger.info("======================================session.getSignature is null");
             throw new SecurityAuthentificationException("bad security.");
         }
         return session.getSignature().equals(createSignature(session.getId(),

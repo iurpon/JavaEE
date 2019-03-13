@@ -16,12 +16,15 @@ import javax.jws.WebMethod;
 import javax.jws.WebService;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 @WebService(endpointInterface = "ru.trandefil.sc.generated.UserEndPoint")
 public class UserEndPointImpl implements UserEndPoint {
 
     @Inject
     private UserService userService;
+
+    private final Logger logger = Logger.getLogger(this.getClass().getName());
 
     @Override
     @WebMethod
@@ -80,6 +83,7 @@ public class UserEndPointImpl implements UserEndPoint {
     @Override
     @WebMethod
     public Session getSession(@NonNull String userName, @NonNull String password) {
+        logger.info("---------------------------------------- getSession");
         return userService.getSession(userName, password);
     }
 
