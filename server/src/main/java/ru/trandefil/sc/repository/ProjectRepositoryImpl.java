@@ -34,7 +34,7 @@ public class ProjectRepositoryImpl implements ProjectRepository {
 
     @Override
     public Project getByName(@NonNull final String userId, @NonNull final String name, @NonNull final EntityManager em) {
-        logger.info("task repo getByName");
+        logger.info("=====================================================project repo getByName");
         final Query query = em.createQuery("select p from Project p where p.user.id = :userId and p.name = :name");
         query.setParameter("userId", userId);
         query.setParameter("name", name);
@@ -54,7 +54,7 @@ public class ProjectRepositoryImpl implements ProjectRepository {
 
     @Override
     public Project save(@NonNull final Project project, @NonNull final EntityManager em) {
-        logger.info("task repo save");
+        logger.info("======================================================project repo save");
         if (project.isNew()) {
             project.setId(UUIDUtil.getUniqueString());
             em.persist(project);
@@ -65,13 +65,13 @@ public class ProjectRepositoryImpl implements ProjectRepository {
 
     @Override
     public void delete(@NonNull final Project project, @NonNull final EntityManager em) {
-        logger.info("task repo delete");
+        logger.info("===================================================project repo delete");
         em.remove(project);
     }
 
     @Override
     public boolean deleteByName(@NonNull final String userId, @NonNull final String projectName, @NonNull final EntityManager em) {
-        logger.info("task repo deleteByName");
+        logger.info("=========================================================project repo deleteByName");
         Project project = getByName(userId, projectName, em);
         if (project == null) {
             logger.info("wrong project name.");
@@ -83,18 +83,7 @@ public class ProjectRepositoryImpl implements ProjectRepository {
 
     @Override
     public void clear(EntityManager em) {
-        try {
-            em.getTransaction().begin();
-            final Query query = em.createQuery("delete from Project");
-            query.executeUpdate();
-            em.getTransaction().commit();
-            em.close();
-        } catch (Exception e) {
-            if (em != null) {
-                em.getTransaction().rollback();
-                em.close();
-            }
-        }
+
     }
 
 }

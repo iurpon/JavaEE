@@ -52,13 +52,13 @@ public class TaskRepositoryImpl implements TaskRepository {
 
     @Override
     public void delete(@NonNull final Task task, @NonNull final EntityManager em) {
-        logger.info("repo delete");
+        logger.info("===========================================repo delete");
         em.remove(task);
     }
 
     @Override
     public boolean deleteByName(@NonNull final String userId, @NonNull final String name, @NonNull final EntityManager em) {
-        logger.info("repo deleteByName");
+        logger.info("===========================================repo deleteByName");
         final Query query = em.createQuery("delete from Task t where t.assignee.id =:userId and t.name = :name");
         query.setParameter("userId", userId);
         query.setParameter("name", name);
@@ -69,18 +69,18 @@ public class TaskRepositoryImpl implements TaskRepository {
 
     @Override
     public Task getByName(@NonNull final String userId, @NonNull final String name, @NonNull final EntityManager em) {
-        logger.info("getByName repo");
+        logger.info("====================================================getByName repo");
         final Query query = em.createQuery("select t from Task t where (t.assignee.id = :userId or t.executor.id = :userId) and t.name = :name");
         query.setParameter("name", name);
         query.setParameter("userId", userId);
         final Task task = (Task) query.getSingleResult();
-        logger.info("returning " + task);
+        logger.info("==============================================================returning " + task);
         return task;
     }
 
     @Override
     public Task getByid(@NonNull final String userId, @NonNull final String id, @NonNull final EntityManager em) {
-        logger.info("repo getById");
+        logger.info("================================================repo getById");
         final Query query = em.createQuery("select t from Task t where (t.assignee.id = :userId or t.executor.id = :userId) and t.id = :id");
         query.setParameter("userId", userId);
         query.setParameter("id", id);

@@ -3,6 +3,7 @@ package ru.trandefil.sc.servlet.user;
 import ru.trandefil.sc.api.UserService;
 import ru.trandefil.sc.model.Role;
 import ru.trandefil.sc.model.User;
+import ru.trandefil.sc.util.HashUtil;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -36,7 +37,7 @@ public class UserCreateServlet extends HttpServlet {
         final String password = req.getParameter("password");
         final String role = req.getParameter("role");
 //        final UserService userService = ServiceLocator.getUserService();
-        final User user = new User(null, name, password, Enum.valueOf(Role.class, role));
+        final User user = new User(null, name, HashUtil.hashPassword(password), Enum.valueOf(Role.class, role));
         userService.save(user);
         List<User> all = userService.getAll();
         req.setAttribute("users", all);

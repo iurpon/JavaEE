@@ -2,6 +2,7 @@ package ru.trandefil.sc.servlet;
 
 import ru.trandefil.sc.api.UserService;
 import ru.trandefil.sc.model.User;
+import ru.trandefil.sc.util.HashUtil;
 import ru.trandefil.sc.util.SessionUtil;
 
 import javax.inject.Inject;
@@ -34,7 +35,7 @@ public class LoginServlet extends HttpServlet {
         final String name = req.getParameter("name");
         final String password = req.getParameter("password");
         final User loginUser = userService.getByName(name);
-        if(loginUser == null || !loginUser.getPassword().equals(password)){
+        if(loginUser == null || !loginUser.getPassword().equals(HashUtil.hashPassword(password))){
             req.setAttribute("message", "Bad login. Try again.");
             req.getRequestDispatcher("/WEB-INF/view/login.jsp").forward(req, resp);
             return;

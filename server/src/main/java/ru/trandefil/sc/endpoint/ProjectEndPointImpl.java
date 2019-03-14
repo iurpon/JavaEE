@@ -41,6 +41,7 @@ public class ProjectEndPointImpl implements ProjectEndPoint {
 
     @Override
     public ProjectDTO updateProject(ProjectDTO project, Session session) {
+        logger.info("===============================================updating project");
         if (!SignatureUtil.checkCorrectSession(session)) {
             System.out.println("bad signature.");
             throw new SecurityAuthentificationException("security authentification exception.");
@@ -95,7 +96,7 @@ public class ProjectEndPointImpl implements ProjectEndPoint {
             System.out.println("bad signature.");
             throw new SecurityAuthentificationException("security authentification exception.");
         }
-        Project project = projectService.getByName(session.getUserId(), projectName);
+        Project project = projectService.getByName( projectName,session.getUserId());
         if (project == null) {
             return null;
         }

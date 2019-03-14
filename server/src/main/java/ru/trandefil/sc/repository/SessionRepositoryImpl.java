@@ -19,7 +19,14 @@ public class SessionRepositoryImpl implements SessionRepository {
     @Override
     public void delete(@NonNull final Session session, @NonNull final EntityManager em) {
         logger.info("=================================delete session repo");
-        em.remove(session);
+        logger.info("================================== entityManager contains ? " + em.contains(session));
+        if(em.contains(session)){
+            logger.info("========================================== contains");
+            em.remove(session);
+        }
+        Session ref = em.getReference(Session.class,session.getId());
+        logger.info("==========================================  geting session ref : " + ref);
+        em.remove(ref);
     }
 
     @Override
@@ -46,8 +53,9 @@ public class SessionRepositoryImpl implements SessionRepository {
     @Override
     public Session getById(String id, EntityManager em) {
         logger.info("===================================getById session repo");
-        final Query query = em.createQuery("select s from Sessions where s.id = :id");
+        final Query query = em.createQuery("select s from Session s where s.id = :id");
         query.setParameter("id",id);
         return (Session)query.getSingleResult();
     }
+
 }
