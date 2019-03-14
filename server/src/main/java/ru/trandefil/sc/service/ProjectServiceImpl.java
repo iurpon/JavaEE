@@ -16,8 +16,9 @@ import java.util.List;
 
 /*@ApplicationScoped
 @Transactional*/
-public class ProjectServiceImpl implements ProjectService {
+public class ProjectServiceImpl {//implements ProjectService {
 
+/*
     @Inject
     private ProjectRepository projectRepository;
 
@@ -71,5 +72,6 @@ public class ProjectServiceImpl implements ProjectService {
     public Project getByName(@NonNull String projectName, @NonNull String userId) {
         return projectRepository.getByName(userId, projectName, entityManager);
     }
+*/
 
 }

@@ -14,9 +14,9 @@ import java.util.logging.Logger;
 
 /*@ApplicationScoped
 @Transactional*/
-public class SessionServiceImpl implements SessionService {
+public class SessionServiceImpl {//implements SessionService {
 
-    private final Logger logger = Logger.getLogger(this.getClass().getName());
+/*    private final Logger logger = Logger.getLogger(this.getClass().getName());
 
     @Inject
     private SessionRepository sessionRepository;
@@ -40,6 +40,6 @@ public class SessionServiceImpl implements SessionService {
     public Session getById(@NonNull final String id) {
         logger.info("======================================== session service getById");
         return sessionRepository.getById(id,entityManager);
-    }
+    }*/
 
 }

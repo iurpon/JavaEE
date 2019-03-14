@@ -13,6 +13,7 @@ import ru.trandefil.sc.util.UUIDUtil;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.logging.Logger;

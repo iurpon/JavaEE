@@ -14,9 +14,9 @@ import java.util.List;
 
 /*@ApplicationScoped
 @Transactional*/
-public class TaskServiceImpl implements TaskService {
+public class TaskServiceImpl {//implements TaskService {
 
-    @Inject
+/*    @Inject
     private TaskRepository taskRepository;
 
     @PersistenceContext(unitName = "EM")
@@ -61,6 +61,6 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public Task getByid(@NonNull final String userId, @NonNull final String id) {
         return taskRepository.getByid(userId, id, entityManager);
-    }
+    }*/
 
 }
