@@ -1,30 +1,45 @@
 package ru.trandefil.sc.api;
 
+import lombok.NonNull;
+import org.apache.deltaspike.data.api.*;
 import ru.trandefil.sc.model.User;
 
-import javax.persistence.EntityManager;
 import java.util.List;
 
-public interface UserRepository {
+@Repository(forEntity = User.class)
+public interface UserRepository extends EntityRepository<User, String> {
 
-    List<User> getAll(EntityManager entityManager);
 
-    User getLogged(String login, String pass, EntityManager entityManager);
+    void persist(@NonNull User user);
 
-    User findByName(String name, EntityManager em);
 
-    User getById(String userId, EntityManager em);
+    User merge(@NonNull User user);
 
-    User saveOrUpdate(User user, EntityManager em);
 
-    void delete(User user, EntityManager em);
+    User getReference(@NonNull Object o);
 
-    boolean deleteByName(String name, EntityManager em);
+    @Override
+    User findBy(@NonNull String s);
 
-    boolean deleteById(String id, EntityManager em);
+    @Override
+    List<User> findAll();
 
-    User getRef(String userId, EntityManager em);
+    @Override
+    void remove(@NonNull User user);
 
-    void clear(EntityManager em);
+    @Query(value = "delete from User u where u.id = :id")
+    int deleteById(@NonNull @QueryParam("id") String id);
+
+    @Query(value = "delete from User u where u.name = :name")
+    int deleteByName(@NonNull @QueryParam("name") String name);
+
+    @Query(value = "select u from User u where u.name = :name")
+    User getByName(@NonNull @QueryParam("name") String name);
+
+    @Query(value = "select u from User u where u.name = :name and u.password = :pass")
+    User getLoggedUser(@NonNull @QueryParam("name") String name, @NonNull @QueryParam("pass") String pass);
+
+    @Query(value = "select u from User u where u.id = :id")
+    User getById(@NonNull @QueryParam("id") String id);
 
 }

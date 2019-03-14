@@ -1,26 +1,48 @@
 package ru.trandefil.sc.api;
 
+import lombok.NonNull;
+import org.apache.deltaspike.data.api.FullEntityRepository;
+import org.apache.deltaspike.data.api.Query;
+import org.apache.deltaspike.data.api.QueryParam;
+import org.apache.deltaspike.data.api.Repository;
 import ru.trandefil.sc.model.Project;
 
-import javax.persistence.EntityManager;
 import java.util.List;
 
-public interface ProjectRepository {
+@Repository
+public interface ProjectRepository extends FullEntityRepository<Project, String> {
 
-    List<Project> getAll(String userId, EntityManager em);
+    @Override
+    void persist(Project project);
 
-    List<Project> getAll(EntityManager em);
+    @Override
+    Project merge(Project project);
 
-    Project getByName(String userId, String projectName, EntityManager em);
+    @Override
+    Project getReference(Object pk);
 
-    Project getById(String userId, String projectId, EntityManager em);
+    @Override
+    Project findBy(String pk);
 
-    Project save(Project project, EntityManager em);
+    @Query(value = "select p from Project p where p.id = :id and p.user.id = :userId")
+    Project getByUserId(@NonNull @QueryParam("id") String id, @NonNull @QueryParam("userId") String userId);
 
-    void delete(Project project, EntityManager em);
+    @Query(value = "select p from Project p where p.user.id = :userId and p.name = :name")
+    Project getByName(@NonNull @QueryParam("userId") String userId, @NonNull @QueryParam("name") String name);
 
-    boolean deleteByName(String userId, String projectName, EntityManager em);
+    @Override
+    List<Project> findAll();
 
-    void clear(EntityManager em);
+    @Query(value = "select p from Project p where p.user.id = :userId")
+    List<Project> getAllFiltered(@NonNull @QueryParam("userId") String userId);
+
+    @Override
+    void remove(Project project);
+
+    @Query(value = "delete from Project p where p.id = :id")
+    int removeById(@NonNull @QueryParam("id") String id);
+
+    @Query(value = "delete from Project p where p.name = :name and p.user.id = :userId")
+    int removeByName(@NonNull @QueryParam("name") String name, @NonNull @QueryParam("userId") String userId);
 
 }

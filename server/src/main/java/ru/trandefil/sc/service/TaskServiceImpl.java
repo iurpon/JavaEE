@@ -7,29 +7,20 @@ import ru.trandefil.sc.model.Task;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import java.util.List;
 
-/*@ApplicationScoped
-@Transactional*/
-public class TaskServiceImpl {//implements TaskService {
+@ApplicationScoped
+@Transactional
+public class TaskServiceImpl implements TaskService {
 
-/*    @Inject
+    @Inject
     private TaskRepository taskRepository;
 
-    @PersistenceContext(unitName = "EM")
-    private EntityManager entityManager;
 
     @Override
     public List<Task> getAll(@NonNull final String userId) {
-        return taskRepository.getAll(userId, entityManager);
-    }
-
-    @Override
-    public List<Task> getAll() {
-        return taskRepository.getAll(entityManager);
+        return taskRepository.getAll(userId);
     }
 
     @Override
@@ -37,7 +28,7 @@ public class TaskServiceImpl {//implements TaskService {
         if (!task.getAssignee().getId().equals(userId)) {
             return null;
         }
-        return taskRepository.save(task, entityManager);
+        return taskRepository.save(task);
     }
 
     @Override
@@ -45,22 +36,28 @@ public class TaskServiceImpl {//implements TaskService {
         if (!task.getAssignee().getId().equals(userId)) {
             return;
         }
-        taskRepository.delete(task, entityManager);
+        taskRepository.remove(task);
     }
 
     @Override
     public boolean deleteByName(@NonNull final String userId, @NonNull final String name) {
-        return taskRepository.deleteByName(userId, name, entityManager);
+//        return taskRepository.deleteByName(userId, name);
+        return false;
     }
 
     @Override
     public Task getByName(@NonNull final String userId, @NonNull final String name) {
-        return taskRepository.getByName(userId, name, entityManager);
+        return taskRepository.getByName(userId, name);
     }
 
     @Override
     public Task getByid(@NonNull final String userId, @NonNull final String id) {
-        return taskRepository.getByid(userId, id, entityManager);
-    }*/
+        return taskRepository.getByid(userId, id);
+    }
+
+    @Override
+    public List<Task> getAll() {
+        return null;
+    }
 
 }

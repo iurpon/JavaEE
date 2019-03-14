@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
@@ -19,6 +20,8 @@ public class SecurityFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
         logger.info("============================================= Security Filter init()");
+        InputStream inputStream = ClassLoader.getSystemResourceAsStream("META-INF/beans.xml");
+        System.out.println("============================================== input Stream " + inputStream);
     }
 
     @Override

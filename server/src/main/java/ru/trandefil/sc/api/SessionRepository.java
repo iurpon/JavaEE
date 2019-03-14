@@ -1,20 +1,25 @@
 package ru.trandefil.sc.api;
 
+import lombok.NonNull;
+import org.apache.deltaspike.data.api.FullEntityRepository;
+import org.apache.deltaspike.data.api.Query;
+import org.apache.deltaspike.data.api.QueryParam;
+import org.apache.deltaspike.data.api.Repository;
 import ru.trandefil.sc.model.Session;
 
-import javax.persistence.EntityManager;
-import java.util.List;
+@Repository
+public interface SessionRepository extends FullEntityRepository<Session, String> {
 
-public interface SessionRepository {
+    @Override
+    void persist(Session session);
 
-    void delete(Session session, EntityManager em);
+    @Override
+    void clear();
 
-    Session save(Session session, EntityManager em);
+    @Override
+    void remove(@NonNull Session session);
 
-    void clear(EntityManager em);
-
-    List<Session> getAll(EntityManager em);
-
-    Session getById(String id, EntityManager em);
+    @Query(value = "delete from Session s where s.id = :sessionId")
+    void deleteSession(@NonNull @QueryParam("sessionId") String sessionId);
 
 }

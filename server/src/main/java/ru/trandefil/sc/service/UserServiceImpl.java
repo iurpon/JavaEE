@@ -5,15 +5,14 @@ import ru.trandefil.sc.api.UserService;
 import ru.trandefil.sc.model.Role;
 import ru.trandefil.sc.model.Session;
 import ru.trandefil.sc.model.User;
-import ru.trandefil.sc.repository.DSSessionRepository;
-import ru.trandefil.sc.repository.DSUserRepository;
+import ru.trandefil.sc.api.SessionRepository;
+import ru.trandefil.sc.api.UserRepository;
 import ru.trandefil.sc.util.HashUtil;
 import ru.trandefil.sc.util.SignatureUtil;
 import ru.trandefil.sc.util.UUIDUtil;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.logging.Logger;
@@ -22,53 +21,48 @@ import java.util.logging.Logger;
 @Transactional
 public class UserServiceImpl implements UserService {
 
-    @Inject
-    private DSUserRepository userRepository;
 
     @Inject
-    private DSSessionRepository sessionRepository;
+    private UserRepository userRepository;
+
+    @Inject
+    private SessionRepository sessionRepository;
 
     private final Logger logger = Logger.getLogger(this.getClass().getName());
 
     @Override
     public void delete(@NonNull final User user) {
-//        userRepository.delete(user, entityManager);
         userRepository.deleteById(user.getId());
     }
 
     @Override
     public boolean deleteByName(@NonNull final String name) {
-//        return userRepository.deleteByName(name, entityManager);
         return userRepository.deleteByName(name) != 0;
     }
 
     @Override
     public User save(@NonNull final User user) {
-//        return userRepository.saveOrUpdate(user, entityManager);
         return userRepository.merge(user);
     }
 
     @Override
     public User getByName(@NonNull final String userName) {
-//        return userRepository.findByName(userName, entityManager);
+        logger.info("=================================================== user service get by name");
         return userRepository.getByName(userName);
     }
 
     @Override
     public User getRefById(@NonNull final String userId) {
-//        return userRepository.getRef(userId, entityManager);
         return null;
     }
 
     @Override
     public User getById(@NonNull final String id) {
-//        return userRepository.getById(id, entityManager);
         return userRepository.getById(id);
     }
 
     @Override
     public List<User> getAll() {
-//        return userRepository.getAll(entityManager);
         return userRepository.findAll();
     }
 
