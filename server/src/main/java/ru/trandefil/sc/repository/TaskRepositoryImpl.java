@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 
-@ApplicationScoped
+//@ApplicationScoped
 public class TaskRepositoryImpl implements TaskRepository {
 
     private final Logger logger = Logger.getLogger(this.getClass().getName());

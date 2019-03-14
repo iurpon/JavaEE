@@ -12,8 +12,8 @@ import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import java.util.logging.Logger;
 
-@ApplicationScoped
-@Transactional
+/*@ApplicationScoped
+@Transactional*/
 public class SessionServiceImpl implements SessionService {
 
     private final Logger logger = Logger.getLogger(this.getClass().getName());

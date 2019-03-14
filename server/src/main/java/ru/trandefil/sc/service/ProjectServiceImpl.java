@@ -14,8 +14,8 @@ import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import java.util.List;
 
-@ApplicationScoped
-@Transactional
+/*@ApplicationScoped
+@Transactional*/
 public class ProjectServiceImpl implements ProjectService {
 
     @Inject

@@ -11,7 +11,7 @@ import javax.persistence.Query;
 import java.util.List;
 import java.util.logging.Logger;
 
-@ApplicationScoped
+//@ApplicationScoped
 public class UserRepositoryImpl implements UserRepository {
 
     private final Logger logger = Logger.getLogger(this.getClass().getName());

@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 
-@ApplicationScoped
+//@ApplicationScoped
 public class SessionRepositoryImpl implements SessionRepository {
 
     private final Logger logger = Logger.getLogger(this.getClass().getName());
