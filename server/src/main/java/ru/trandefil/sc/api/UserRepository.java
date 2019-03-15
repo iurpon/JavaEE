@@ -6,16 +6,15 @@ import ru.trandefil.sc.model.User;
 
 import java.util.List;
 
-@Repository(forEntity = User.class)
-public interface UserRepository extends EntityRepository<User, String> {
+public interface UserRepository extends FullEntityRepository<User, String> {
 
-
+    @Override
     void persist(@NonNull User user);
 
-
+    @Override
     User merge(@NonNull User user);
 
-
+    @Override
     User getReference(@NonNull Object o);
 
     @Override
