@@ -37,7 +37,7 @@ public class DeleteProjectServlet extends HttpServlet {
         logger.info("=====================================DeleteProjectServlet doGet()");
         final String id = request.getParameter(("id"));
         final User current = SessionUtil.getLoginUser(request.getSession());
-        projectService.deleteByName(current.getId(),id);
+        projectService.deleteById(current.getId(),id);
         response.sendRedirect("projects");
     }
 

@@ -6,6 +6,7 @@ import ru.trandefil.sc.api.ProjectService;
 import ru.trandefil.sc.api.UserService;
 import ru.trandefil.sc.model.Project;
 import ru.trandefil.sc.model.User;
+import ru.trandefil.sc.util.UUIDUtil;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -29,13 +30,14 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public Project save(@NonNull final String userId, @NonNull final String name, @NonNull final String description) {
         final User user = userService.getById(userId);
-        final Project project = new Project(null, name, description, user);
-        return projectRepository.save(project);
+        final Project project = new Project(UUIDUtil.getUniqueString(), name, description, user);
+        projectRepository.persist(project);
+        return project;
     }
 
     @Override
     public Project update(@NonNull final Project project) {
-        return projectRepository.save(project);
+        return projectRepository.merge(project);
     }
 
     @Override
