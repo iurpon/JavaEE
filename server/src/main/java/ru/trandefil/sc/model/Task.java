@@ -48,9 +48,12 @@ public class Task extends AbstractEntity {
     public String toString() {
         return "Task{" +
                 "name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", start=" + start +
+                ", end=" + end +
+                ", project=" + project +
                 ", assignee=" + assignee +
                 ", executor=" + executor +
                 '}';
     }
-
 }

@@ -33,8 +33,8 @@
         <td>${task.description}</td>
         <td>${task.project.name}</td>
         <td>${task.executor.name}</td>
-        <td><fmt:formatDate value="${task.start}" pattern="yyyy-MM-dd"/></td>
-        <td><fmt:formatDate value="${task.end}" pattern="yyyy-MM-dd"/></td>
+        <td><fmt:formatDate value="${task.start}" pattern="dd-MM-yyyy"/></td>
+        <td><fmt:formatDate value="${task.end}" pattern="dd-MM-yyyy"/></td>
         <td><a href="updateTask?id=${task.id}">Update</a></td>
         <td><a href="deleteTask?id=${task.id}">Delete</a></td>
     </tfoot>

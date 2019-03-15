@@ -4,6 +4,7 @@ import lombok.NonNull;
 import ru.trandefil.sc.api.TaskRepository;
 import ru.trandefil.sc.api.TaskService;
 import ru.trandefil.sc.model.Task;
+import ru.trandefil.sc.util.UUIDUtil;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -28,7 +29,12 @@ public class TaskServiceImpl implements TaskService {
         if (!task.getAssignee().getId().equals(userId)) {
             return null;
         }
-        return taskRepository.save(task);
+        if(task.isNew()){
+            task.setId(UUIDUtil.getUniqueString());
+            taskRepository.persist(task);
+        }
+        taskRepository.merge(task);
+        return task;
     }
 
     @Override
@@ -41,8 +47,7 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public boolean deleteByName(@NonNull final String userId, @NonNull final String name) {
-//        return taskRepository.deleteByName(userId, name);
-        return false;
+        return taskRepository.deleteByName(userId,name) != 0;
     }
 
     @Override
@@ -57,7 +62,7 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public List<Task> getAll() {
-        return null;
+        return taskRepository.findAll();
     }
 
 }

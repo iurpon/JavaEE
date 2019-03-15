@@ -6,6 +6,7 @@ import ru.trandefil.sc.model.User;
 
 import java.util.List;
 
+@Repository
 public interface UserRepository extends FullEntityRepository<User, String> {
 
     @Override

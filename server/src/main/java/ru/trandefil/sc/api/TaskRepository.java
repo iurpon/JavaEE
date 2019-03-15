@@ -12,7 +12,7 @@ import java.util.List;
 @Repository
 public interface TaskRepository extends FullEntityRepository<Task, String> {
 
-    @Query(value = "select t from Task t where t.assignee.id = :userId")
+    @Query(value = "select t from Task t where t.assignee.id = :userId  or t.executor.id = :userId")
     List<Task> getAll(@NonNull @QueryParam("userId") String userId);
 
     @Override

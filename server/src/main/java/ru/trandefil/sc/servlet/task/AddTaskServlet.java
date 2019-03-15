@@ -34,6 +34,7 @@ public class AddTaskServlet extends HttpServlet {
     private UserService userService;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        logger.info("====================================== add task servlet do post");
         final String projectId = request.getParameter("projectId");
         if (projectId.isEmpty() || projectId == null) {
             logger.info("error -------------------------------------------");
@@ -79,7 +80,7 @@ public class AddTaskServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        logger.info("AddTaskServlet doGet()");
+        logger.info("=================================AddTaskServlet doGet()");
         final String projecId = request.getParameter("id");
         request.setAttribute("projectId", projecId);
         request.setAttribute("action", "create");

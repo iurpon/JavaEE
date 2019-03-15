@@ -76,6 +76,7 @@ public class UpdateTaskServlet extends HttpServlet {
         final User current = SessionUtil.getLoginUser(request.getSession());
         final Task task = taskService.getByid(current.getId(),id);
         request.setAttribute("taskEntity", task);
+        logger.info("===================================================updating task : " + task);
         request.setAttribute("action", "update");
         request.getRequestDispatcher("/WEB-INF/view/editTask.jsp").forward(request, response);
     }

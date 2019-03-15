@@ -11,6 +11,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.logging.Logger;
 
 @ApplicationScoped
 @Transactional
@@ -21,6 +22,8 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Inject
     private UserService userService;
+
+    private final Logger logger = Logger.getLogger(this.getClass().getName());
 
 
     @Override
@@ -47,11 +50,14 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public Project getById(@NonNull final String id, @NonNull final String userId) {
-        return projectRepository.getByUserId(userId, id);
+        return projectRepository.getByUserId(id, userId);
     }
 
     @Override
     public void delete(@NonNull final String userId, @NonNull final Project project) {
+        if (!project.getUser().getId().equals(userId)) {
+            return;
+        }
         final Project byId = projectRepository.getByUserId(userId, project.getId());
         if (byId != null) {
             projectRepository.remove(byId);
@@ -64,8 +70,16 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public Project getByName(@NonNull String projectName, @NonNull String userId) {
+    public Project getByName(@NonNull final String projectName, @NonNull final String userId) {
         return projectRepository.getByName(userId, projectName);
+    }
+
+    @Override
+    public void deleteById(@NonNull final String userId, @NonNull final String projectId) {
+        logger.info("=================================project service deleteBy id");
+        final Project project = projectRepository.getByUserId(projectId, userId);
+        logger.info("================================ getProject " + project);
+        projectRepository.remove(project);
     }
 
 }

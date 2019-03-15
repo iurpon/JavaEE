@@ -15,21 +15,19 @@ import java.util.logging.Logger;
 @WebFilter("/*")
 public class SecurityFilter implements Filter {
 
-    private Logger logger = Logger.getLogger(this.getClass().getName());
+    private final Logger logger = Logger.getLogger(this.getClass().getName());
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
         logger.info("============================================= Security Filter init()");
-        InputStream inputStream = ClassLoader.getSystemResourceAsStream("META-INF/beans.xml");
-        System.out.println("============================================== input Stream " + inputStream);
     }
 
     @Override
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws IOException, ServletException {
         logger.info("-------------------------------- filter starts ");
-        HttpServletRequest request = (HttpServletRequest) req;
-        HttpServletResponse response = (HttpServletResponse) resp;
-        String servletPath = request.getServletPath();
+        final HttpServletRequest request = (HttpServletRequest) req;
+        final HttpServletResponse response = (HttpServletResponse) resp;
+        final String servletPath = request.getServletPath();
         logger.info("========================================================== servletPath :" + servletPath);
         if(servletPath.contains("EndPoint")){
             logger.info("======================================== THIS IS ENDPOINT NO SECURITY");
@@ -39,7 +37,7 @@ public class SecurityFilter implements Filter {
 
         // Информация пользователя сохранена в Session
         // (После успешного входа в систему).
-        User loginUser = SessionUtil.getLoginUser(request.getSession());
+        final User loginUser = SessionUtil.getLoginUser(request.getSession());
         logger.info("----------------------------- user READY ? : " + loginUser);
         logger.info("============================================== Servlet Path : " + servletPath);
         if (servletPath.equals("/login")) {

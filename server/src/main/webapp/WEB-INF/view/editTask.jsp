@@ -1,5 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="ru.trandefil.sc.util.DateUtil" %>
+<%@ page import="java.util.Date" %>
 
 <html>
 <head>
@@ -44,7 +46,7 @@
     </c:if>
     <c:if test = "${actions eq 'update'}">
         <%--<jsp:useBean id="task" type="ru.trandefil.sc.model.Task" scope="request"/>--%>
-        <c:set var="task" value="${taskEntity}"/>
+        <c:set var="task" value="${taskEntity}"/
         <form method="post" action="updateTask" class="ui-form">
             <h3>Update Task data</h3>
             <input type="hidden" name="id" value="${task.id}">
@@ -64,9 +66,10 @@
             <div class="form-row">
                 <input type="date" id="start" value="${task.start}" name="start"
                        required autocomplete="off" ><label for="start">Start Task</label>
+
             </div>
             <div class="form-row">
-                <input type="date" id="end" value="${task.end}" name="end"
+                <input type="date" id="end" value="{task.end}" name="end"
                        required autocomplete="off" ><label for="end">End Task</label>
             </div>
             <div class="form-row">

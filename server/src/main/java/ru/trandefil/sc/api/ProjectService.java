@@ -16,10 +16,13 @@ public interface ProjectService {
 
     void delete(String userId, Project project);
 
+    void deleteById(String userId, String projectId);
+
     boolean deleteByName(String userId, String projectName);
 
     Project getByName(String userId, String projectName);
 
     Project update(Project project);
+
 
 }

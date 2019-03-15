@@ -37,7 +37,6 @@ public class AddProjectServlet extends HttpServlet {
             return;
         }
         final User current = SessionUtil.getLoginUser(request.getSession());
-/*        final Project project = new Project(null, name, description,current);*/
         projectService.save(current.getId(),name,description);
         response.sendRedirect("projects");
     }
