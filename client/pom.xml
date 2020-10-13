@@ -16,7 +16,7 @@
     <packaging>jar</packaging>
 
     <properties>
-        <junit.vesion>4.10</junit.vesion>
+        <junit.vesion>4.13.1</junit.vesion>
         <cxf.version>3.2.7</cxf.version>
     </properties>
 
